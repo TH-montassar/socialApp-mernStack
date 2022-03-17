@@ -18,6 +18,8 @@ const userRouter = require("./auth_routes/user.controllers");
 const commentRouter = require("./routes/comment.routes");
 const impressionRouter = require("./routes/impression.routes");
 const messageRoutes =require("./routes/message.routes")
+const postRoutes=require("./routes/post.routes")
+const profileRoutes=require("./routes/profile.routes")
 //middelware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +29,8 @@ app.use("/api/user", userRouter);
 app.use("/api/comment", commentRouter);
 app.use("/api/impression", impressionRouter);
 app.use("/api/message", messageRoutes)
+app.use("/api/post",postRoutes)
+app.use("/api/profile",profileRoutes)
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
