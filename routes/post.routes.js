@@ -1,3 +1,19 @@
+const router = require("express").Router();
+const {
+  createComment,
+  updateComment,
+  getComment,
+  getComments,
+  deleteComment,
+  createCommentReplay,
+} = require("../controllers/commend.controllers");
+const {
+  dislike,
+
+  newReact,
+  getReacts,
+  deleteReact,
+} = require("../controllers/react.controllers");
 const {
   createPost,
   sharePost,
@@ -6,13 +22,47 @@ const {
   getPosts,
   deletePost,
 } = require("../controllers/post.controllers");
+const { isCommentOwner } = require("../middlewares/isCommentOwner");
+
+const Comment = require("../models/comment.models");
 
 const { isPostOwner } = require("../middlewares/isPostOwner");
 const verifyToken = require("../middlewares/verifyToken");
 
 const Post = require("../models/post.models");
 
-const router = require("express").Router();
+const React = require("../models/react.models");
+const { isReactOwner } = require("../middlewares/isReactOwner");
+
+router.param("react", async (req, res, next, id) => {
+  try {
+    const react = await React.findById(id);
+
+    if (!react) {
+      return res.status(404).json("not found react");
+    } else {
+      req.react = react;
+      next();
+    }
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+router.param("comment", async (req, res, next, id) => {
+  try {
+    const comment = await Comment.findById(id);
+
+    if (!comment) {
+      return res.status(404).json("not found comment");
+    } else {
+      req.comment = comment;
+      next();
+    }
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
 
 router.param("post", async (req, res, next, id) => {
   try {
@@ -28,12 +78,33 @@ router.param("post", async (req, res, next, id) => {
     return res.status(500).json(err);
   }
 });
-
-router.post("/:post", verifyToken, sharePost);
+// ----------------------------posts----------
+router.post("/:post/share", verifyToken, sharePost);
 router.post("/", verifyToken, createPost);
 router.put("/:post", verifyToken, isPostOwner, updatePost);
-//!not working
 router.get("/", getPosts);
 router.get("/me", verifyToken, getMyPost);
 router.delete("/:post", verifyToken, isPostOwner, deletePost);
+// ----------------------------comments----------
+router.post("/:post/:comment", verifyToken, createCommentReplay);
+router.post("/:post", verifyToken, createComment);
+router.put(
+  "/:post/comments/:comment",
+  verifyToken,
+  isCommentOwner,
+  updateComment
+);
+//router.get("/:post/comments/:comment", verifyToken, isCommentOwner, getComment);
+router.get("/:post/", verifyToken, getComments);
+router.delete(
+  "/:post/comments/:comment",
+  verifyToken,
+  isCommentOwner,
+  deleteComment
+);
+// ----------------------------Reacts----------
+router.post("/:post/react", verifyToken, newReact);
+router.put("/:post/dislike/:react", verifyToken, dislike);
+router.get("/:post", verifyToken, getReacts);
+router.delete("/:post/delete/:react", isReactOwner, verifyToken, deleteReact);
 module.exports = router;

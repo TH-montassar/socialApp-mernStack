@@ -1,4 +1,4 @@
-const Activity = require("../models/activity.models");
+
 const Post = require("../models/post.models");
 
 const createPost = async (req, res) => {
@@ -30,7 +30,7 @@ const sharePost = async (req, res) => {
 
   const newPost = new Post({
     author: req.verifiedUser._id,
-
+    content: req.body.content,
     post: previousPost,
   });
 
@@ -87,7 +87,7 @@ const deletePost = async (req, res) => {
     const deletePost = await post.delete();
     //const deletePost = await Post.findByIdAndDelete(post._id)
 
-    return res.status(200).json(deletePost);
+    return res.status(200).json("delete Post");
   } catch (err) {
     return res.status(500).json(err);
   }

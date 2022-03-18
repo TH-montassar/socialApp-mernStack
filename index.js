@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const router = require("./auth_routes/user.controllers");
+const router = require("./controllers/user.controllers");
 //db connection
 mongoose.connect(process.env.MONGO_DB_URI);
 mongoose.connection.on("connected", () => {
@@ -14,23 +14,23 @@ mongoose.connection.on("error", (err) => {
 });
 
 //import routes
-const userRouter = require("./auth_routes/user.controllers");
-const commentRouter = require("./routes/comment.routes");
-const impressionRouter = require("./routes/impression.routes");
-const messageRoutes =require("./routes/message.routes")
-const postRoutes=require("./routes/post.routes")
-const profileRoutes=require("./routes/profile.routes")
+const userRouter = require("./routes/user.routes");
+//const commentRouter = require("./routes/comment.routes");
+//const reactRouter = require("./routes/react.routes");
+const messageRoutes = require("./routes/message.routes");
+const postRoutes = require("./routes/post.routes");
+
 //middelware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes middleware
-app.use("/api/user", userRouter);
-app.use("/api/comment", commentRouter);
-app.use("/api/impression", impressionRouter);
-app.use("/api/message", messageRoutes)
-app.use("/api/post",postRoutes)
-app.use("/api/profile",profileRoutes)
+app.use("/api/users", userRouter);
+//app.use("/api/comments", commentRouter);
+//app.use("/api/reacts", reactRouter);
+app.use("/api/messages", messageRoutes);
+app.use("/api/posts", postRoutes);
+
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {

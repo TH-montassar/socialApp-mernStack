@@ -2,7 +2,7 @@
 module.exports.isProfileOwner = (req, res, next) => {
     console.log("profile id",req.profile._id)
     console.log("user",req.verifiedUser.profile)
-if (req.profile._id ==req.verifiedUser.profile) {
+if (req.profile._id.toString() ===req.verifiedUser.profile) {
    
     next();
     

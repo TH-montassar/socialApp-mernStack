@@ -2,21 +2,20 @@ const Activity = require("../models/activity.models");
 const Comment = require("../models/comment.models");
 
 const createComment = async (req, res) => {
-  // const newActivity = new Activity({
-  //   activity: "Comment",
-  //   comment: req.comment._id,
-  // });
-  // const savedActivity = await newActivity.save();
-
   const newComment = new Comment({
     content: req.body.content,
     author: req.verifiedUser._id,
     post: req.post._id,
   });
-
+console.log(newComment)
   try {
     const savedComment = await newComment.save();
-
+    const newActivity = new Activity({
+      activity: savedComment._id,
+      activityModel: "Comment",
+      user: req.verifiedUser._id,
+    });
+    const savedActivity = await newActivity.save();
     return res.status(201).json(savedComment);
   } catch (err) {
     return res.status(500).json(err);
@@ -83,7 +82,7 @@ const deleteComment = async (req, res) => {
     const deleteComment = await comment.delete();
     //const deleteComment = await Comment.findByIdAndDelete(comment._id)
 
-    return res.status(200).json(deleteComment);
+    return res.status(200).json("deleteComment");
   } catch (err) {
     return res.status(500).json(err);
   }

@@ -49,8 +49,8 @@ router.param("post", async (req, res, next, id) => {
 
 router.post("/:post/:comment", verifyToken,createCommentReplay);
 router.post("/:post/", verifyToken, createComment);
-router.put("/:post/:comment", verifyToken, isCommentOwner, updateComment);
-router.get("/:post/:comment", verifyToken, isCommentOwner, getComment);
+router.put("/:post/comment/:comment", verifyToken, isCommentOwner, updateComment);
+router.get("/:post/comment/:comment", verifyToken, isCommentOwner, getComment);
 router.get("/:post/", verifyToken, getComments);
-router.delete("/:post/:comment", verifyToken, isCommentOwner, deleteComment);
+router.delete("/:post/comment/:comment", verifyToken, isCommentOwner, deleteComment);
 module.exports = router;

@@ -3,21 +3,21 @@ const {
   like,
   dislike,
   newLike,
-  getImpressions,
-  deleteImpression,
-} = require("../controllers/impression.controllers");
+  getreacts,
+  deletereact,
+} = require("../controllers/react.controllers");
 const verifyToken = require("../middlewares/verifyToken");
 const Post = require("../models/post.models");
-const Impression = require("../models/impression.models");
-const { isImpressionOwner } = require("../middlewares/isimpressionOwner");
-router.param("impression", async (req, res, next, id) => {
+const react = require("../models/react.models");
+const { isReactOwner } = require("../middlewares/isReactOwner");
+router.param("react", async (req, res, next, id) => {
   try {
-    const impression = await Impression.findById(id);
+    const react = await react.findById(id);
 
-    if (!impression) {
-      return res.status(404).json("not found impression");
+    if (!react) {
+      return res.status(404).json("not found react");
     } else {
-      req.impression = impression;
+      req.react = react;
       next();
     }
   } catch (err) {
@@ -40,11 +40,10 @@ router.param("post", async (req, res, next, id) => {
   }
 });
 
-router.post("/:post/newLike", verifyToken, newLike);
-
-router.put("/:post/like/:impression", verifyToken, like);
-router.put("/:post/dislike/:impression", verifyToken, dislike);
-router.get("/:post/", verifyToken, getImpressions);
-router.delete("/:post/delete/:impression", isImpressionOwner, verifyToken, deleteImpression);
+router.post("/:post/like", verifyToken, newLike);
+router.post("/:post/dislike", verifyToken, newLike);
+router.put("/:post/dislike/:react", verifyToken, dislike);
+router.get("/:post/", verifyToken, getreacts);
+router.delete("/:post/delete/:react", isReactOwner, verifyToken, deletereact);
 
 module.exports = router;

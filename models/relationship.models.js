@@ -2,9 +2,13 @@ const mongoose = require("mongoose");
 
 const RelationshipSchema = new mongoose.Schema(
   {
-    status: { type: String, enum: ["friend ", "blocked"], default: "blocked" },
+    status: {
+      type: String,
+      enum: ["friend", "blocked", "pending"],
+      default: "pending",
+    },
     friend: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    client: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
