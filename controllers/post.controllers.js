@@ -84,7 +84,7 @@ const getPosts = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = req.post;
-    const deletePost = await post.delete();
+    await post.delete();
     //const deletePost = await Post.findByIdAndDelete(post._id)
 
     return res.status(200).json("delete Post");

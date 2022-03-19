@@ -4,10 +4,10 @@ const RelationshipSchema = new mongoose.Schema(
   {
     status: {
       type: String,
-      enum: ["friend", "blocked", "pending","add friend","requested"],
+      enum: ["friesnd", "blocked", "pending","add frisend","requested"],
       default: "pending",
     },
-    friend: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    receiver: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }

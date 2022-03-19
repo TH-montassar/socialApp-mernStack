@@ -4,18 +4,16 @@ const User = require("../models/user.models");
 const sendFriendRequest = async (req, res) => {
   const currentUser = req.verifiedUser._id;
   console.log(currentUser);
-  const friend = req.user._id;
-  console.log(friend);
+  const receiver = req.user._id;
+  console.log(receiver);
 
-  
-//console.log(currentUser===friend)
-  if (friend.toString() === currentUser.toString()) {
+  if (receiver.toString() === currentUser.toString()) {
     return res.status(404).json(" you can't send to your self");
   }
 
   const newRelationship = new Relationship({
     status: "requested",
-    friend: friend,
+    receiver: receiver,
     user: currentUser,
   });
 
@@ -29,21 +27,20 @@ const sendFriendRequest = async (req, res) => {
 };
 
 const acceptFriendRequest = async (req, res) => {
-  const user = req.verifiedUser._id;
-  const relationship = await Relationship.findById({ friend: user });
-  const relationshipId = relationship._id;
-  if (!recipientFriend) {
+  const currentUser = req.verifiedUser._id;
+  const relationship = await Relationship.findById({ receiver: currentUser });
+
+  const user = req.user._id;
+  if (! relationship._id ) {
     return res.status(401).json(" no friend req for you");
   }
 
   try {
     const acceptFriendRequest = await relationship.findByIdAndUpdate(
       relationshipId,
-      { friend: "friend" },
+      { status: "friend" },
       { new: true }
     );
-
-    
 
     return res.status(201).json(acceptFriendRequest);
   } catch (err) {
@@ -51,22 +48,17 @@ const acceptFriendRequest = async (req, res) => {
   }
 };
 
-const rejectFriendRequest  = async (req, res) => {
-  const  relationship = req.relationship
-  
+const rejectFriendRequest = async (req, res) => {
+  const relationship = req.relationship;
+
   try {
-   await react.findByIdAndDelete(relationship._id);
-    return res.status(204);
+    await Relationship.findByIdAndDelete(relationship);
+
+    return res.status(204).json();
   } catch (err) {
     return res.status(500).json(err);
   }
-
-
-
 };
-
-
-
 
 const getFriends = async (req, res) => {
   const currentUser = req.verifiedUser._id;

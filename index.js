@@ -19,7 +19,7 @@ const userRouter = require("./routes/user.routes");
 //const reactRouter = require("./routes/react.routes");
 const messageRoutes = require("./routes/message.routes");
 const postRoutes = require("./routes/post.routes");
-const relationshipRouter = require("./routes/relationship.routes");
+const authRouter = require("./routes/auth.routes");
 
 //middelware
 app.use(express.json());
@@ -27,11 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 
 //routes middleware
 app.use("/api/users", userRouter);
-//app.use("/api/comments", commentRouter);
-//app.use("/api/reacts", reactRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/messages", messageRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/api/friends",relationshipRouter)
 
 const port = process.env.PORT || 8000;
 

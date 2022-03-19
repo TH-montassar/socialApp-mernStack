@@ -1,22 +1,11 @@
 const Profile = require("../models/profile.models");
 
 const getProfile = async (req, res) => {
-  const profileId = req.profile._id.toString();
-  const user=req.user.profile.toString()
-  console.log(profileId)
-  console.log(user)
- 
+  const user = req.user.profile;
+
   try {
-if (profileId===user) {
-  const profile = await Profile.findById(profileId);
-  return res.status(200).json(profile);
-}else{
-  return res.status(404).json("not found profile for this user");
-}
-
-
-
-   
+    const profile = await Profile.findById(user);
+    return res.status(200).json(profile);
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -26,7 +15,7 @@ const getOwnedProfile = async (req, res) => {
   const profileId = req.verifiedUser.profile;
   console.log(profileId);
   try {
-    const profile = await Profile.findById( profileId );
+    const profile = await Profile.findById(profileId);
     console.log(profile);
     return res.status(200).json(profile);
   } catch (err) {

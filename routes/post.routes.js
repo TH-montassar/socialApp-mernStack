@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
   createComment,
   updateComment,
-  getComment,
+
   getComments,
   deleteComment,
   createCommentReplay,
@@ -105,7 +105,7 @@ router.delete(
   isCommentOwner,
   deleteComment
 );
-// ----------------------------Reacts----------
+// ----------------------------Reacts-------------------
 router.post("/:post/reacts/like", verifyToken, newReact);
 router.post("/:post/reacts/dislike", verifyToken, newReact);
 

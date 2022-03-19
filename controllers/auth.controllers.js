@@ -17,10 +17,10 @@ const  register= async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(16);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    //! creation Profile
+    //* creation Profile
     const newProfile = new Profile();
     const savedProfile = await newProfile.save();
-    //!------
+    ///------
 
     const newUser = new User({
       firstName: req.body.firstName,

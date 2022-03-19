@@ -7,8 +7,9 @@ module.exports.activity = async (req, res, next) => {
       user: req.verifiedUser._id,
     });
     await newActivity.save();
-    next();
   } catch (err) {
-    return res.status(500).json(err);
+    console.log(err);
+  } finally {
+    next();
   }
 };
