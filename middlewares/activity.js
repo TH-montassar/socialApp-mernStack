@@ -6,8 +6,7 @@ module.exports.activity = async (req, res, next) => {
       activityModel: "Comment",
       user: req.verifiedUser._id,
     });
-    const savedActivity = await newActivity.save();
-    return res.status(201).json(savedActivity);
+    await newActivity.save();
     next();
   } catch (err) {
     return res.status(500).json(err);

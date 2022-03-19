@@ -2,30 +2,30 @@ const Relationship = require("../models/relationship.models");
 const User = require("../models/user.models");
 
 const sendFriendRequest = async (req, res) => {
-  const currentUser = req.verifiedUser._id.toString();
+  const currentUser = req.verifiedUser._id;
   console.log(currentUser);
-  // const friend = req.user._id.toString();
-  // console.log(friend);
+  const friend = req.user._id;
+  console.log(friend);
 
-  // const recipientUser = await User.findById(friend);
+  
+//console.log(currentUser===friend)
+  if (friend.toString() === currentUser.toString()) {
+    return res.status(404).json(" you can't send to your self");
+  }
 
-  // if (recipientUser === currentUser) {
-  //   return res.status(404).json(" you can't send to your self");
-  // }
+  const newRelationship = new Relationship({
+    status: "requested",
+    friend: friend,
+    user: currentUser,
+  });
 
-  // const newRelationship = new Relationship({
-  //   status: "requested",
-  //   friend: friend,
-  //   user: user,
-  // });
+  try {
+    const savedRelationship = await newRelationship.save();
 
-  // try {
-  //   const savedRelationship = await newRelationship.save();
-
-  //   return res.status(201).json(savedRelationship);
-  // } catch (err) {
-  //   return res.status(500).json(err);
-  // }
+    return res.status(201).json(savedRelationship);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };
 
 const acceptFriendRequest = async (req, res) => {
@@ -43,35 +43,30 @@ const acceptFriendRequest = async (req, res) => {
       { new: true }
     );
 
-    const savedRelationship = await acceptFriendRequest.save();
+    
 
-    return res.status(201).json(savedRelationship);
+    return res.status(201).json(acceptFriendRequest);
   } catch (err) {
     return res.status(500).json(err);
   }
 };
-const ejectFriendRequest = async (req, res) => {
-  const user = req.verifiedUser._id;
-  const relationship = await Relationship.findById({ friend: user });
-  const relationshipId = relationship._id;
-  if (!recipientFriend) {
-    return res.status(401).json(" no friend req for you");
-  }
 
+const rejectFriendRequest  = async (req, res) => {
+  const  relationship = req.relationship
+  
   try {
-    const acceptFriendRequest = await relationship.findByIdAndUpdate(
-      relationshipId,
-      { friend: "blocked" },
-      { new: true }
-    );
-
-    const savedRelationship = await acceptFriendRequest.save();
-
-    return res.status(201).json(savedRelationship);
+   await react.findByIdAndDelete(relationship._id);
+    return res.status(204);
   } catch (err) {
     return res.status(500).json(err);
   }
+
+
+
 };
+
+
+
 
 const getFriends = async (req, res) => {
   const currentUser = req.verifiedUser._id;
@@ -108,5 +103,6 @@ const getFriend = async (req, res) => {
 module.exports.sendFriendRequest = sendFriendRequest;
 module.exports.getFriend = getFriend;
 module.exports.acceptFriendRequest = acceptFriendRequest;
+module.exports.rejectFriendRequest = rejectFriendRequest;
 
 module.exports.getFriends = getFriends;

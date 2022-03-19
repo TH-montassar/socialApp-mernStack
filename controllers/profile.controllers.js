@@ -26,7 +26,7 @@ const getOwnedProfile = async (req, res) => {
   const profileId = req.verifiedUser.profile;
   console.log(profileId);
   try {
-    const profile = await Profile.findById({ _id: profileId });
+    const profile = await Profile.findById( profileId );
     console.log(profile);
     return res.status(200).json(profile);
   } catch (err) {

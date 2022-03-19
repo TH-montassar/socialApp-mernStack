@@ -21,25 +21,7 @@ const newReact = async (req, res) => {
 
 
 
-const getReactsByPost = async (req, res) => {
-  const postId = req.post._id;
-  console.log(postId);
-  try {
-    const react = await React.find({ post: postId });
-    //! consol undefined but it work 😒
-    console.log(react.react);
 
-    const reactLength = react.length;
-    if (reactLength === 0) {
-      return res.status(401).json("no react for this post");
-    }
-
-    return res.status(200).json(react);
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-};
-//filterComment
 
 const deleteReact = async (req, res) => {
   const react = req.react;
@@ -56,5 +38,5 @@ module.exports.newReact = newReact;
 
 
 
-module.exports.getReactsByPost = getReactsByPost;
+
 module.exports.deleteReact = deleteReact;

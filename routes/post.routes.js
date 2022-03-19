@@ -90,7 +90,7 @@ router.get("/me", verifyToken, getMyPost);
 router.delete("/:post", verifyToken, isPostOwner, deletePost);
 // ----------------------------comments----------
 router.post("/:post/:comment", verifyToken, createCommentReplay);
-router.post("/:post", verifyToken,activity ,createComment);
+router.post("/:post", verifyToken, createComment, activity);
 router.put(
   "/:post/comments/:comment",
   verifyToken,
@@ -107,7 +107,7 @@ router.delete(
 );
 // ----------------------------Reacts----------
 router.post("/:post/reacts/like", verifyToken, newReact);
-router.post("/:post/reacts/dislike", verifyToken,newReact);
-router.get("/:post/reacts", verifyToken, getReactsByPost);
+router.post("/:post/reacts/dislike", verifyToken, newReact);
+
 router.delete("/:post/reacts/:react", isReactOwner, verifyToken, deleteReact);
 module.exports = router;
