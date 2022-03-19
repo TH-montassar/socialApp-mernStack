@@ -1,21 +1,19 @@
 const {
-  getOwnedProfile,
+  getProfile,
   updateProfile,
-  removeAllInfoProfile,
-  removeCover,
-  removeAvatar,
-  removeBio,
-  removeBirthday,
+  getOwnedProfile,
+
 } = require("../controllers/profile.controllers");
 const { isProfileOwner } = require("../middlewares/isProfileOwner");
 const verifyToken = require("../middlewares/verifyToken");
 const Profile = require("../models/profile.models");
+const User = require("../models/user.models");
 
 const router = require("express").Router();
 
 router.param("user", async (req, res, next, id) => {
   try {
-    const user = await Profile.findById(id);
+    const user = await User.findById(id);
 
     if (!user) {
       return res.status(404).json("not found user");
@@ -45,6 +43,7 @@ router.param("profile", async (req, res, next, id) => {
 
 router.put("/:user/:profile", verifyToken, isProfileOwner, updateProfile);
 
-router.get("/:user/me", verifyToken, getOwnedProfile);
+router.get("/:user/me", verifyToken, getProfile);
+
 
 module.exports = router;

@@ -1,12 +1,13 @@
 const { register, login } = require("../controllers/user.controllers");
 const {
-  getOwnedProfile,
+  getProfile,
   updateProfile,
+  getOwnedProfile,
 } = require("../controllers/profile.controllers");
 const { isProfileOwner } = require("../middlewares/isProfileOwner");
 const verifyToken = require("../middlewares/verifyToken");
 const Profile = require("../models/profile.models");
-const User =require("../models/user.models")
+const User = require("../models/user.models");
 const router = require("express").Router();
 router.post("/register", register);
 router.post("/login", login);
@@ -43,6 +44,6 @@ router.param("profile", async (req, res, next, id) => {
 
 router.put("/:user/:profile", verifyToken, isProfileOwner, updateProfile);
 
-router.get("/:user/me", verifyToken, getOwnedProfile);
-
+router.get("/:user/:profile", verifyToken, getProfile);
+router.get("/myProfile", verifyToken, getOwnedProfile);
 module.exports = router;

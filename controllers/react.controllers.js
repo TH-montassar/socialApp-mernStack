@@ -1,10 +1,12 @@
-const react = require("../models/react.models");
+const React = require("../models/react.models");
 
 const newReact = async (req, res) => {
   try {
-    const newReact = new react({
+    const newReact = new React({
       author: req.verifiedUser._id,
-      react: req.path.split("/")[2] === "like" ? "like" : "dislike",
+
+  
+      react: req.path.split("/")[3] === "like" ? "like" : "dislike",
       post: req.post._id,
     });
 
@@ -16,23 +18,21 @@ const newReact = async (req, res) => {
   }
 };
 
-const dislike = async (req, res) => {
-  const reactId = req.params.reactId;
-  try {
-    const dislike = await react.findByIdAndUpdate(
-      reactId,
-      { react: "dislike" },
-      { new: true }
-    );
-    return res.status(200).json(dislike);
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-};
 
-const getReacts = async (req, res) => {
+
+
+const getReactsByPost = async (req, res) => {
+  const postId = req.post._id;
+  console.log(postId);
   try {
-    const react = await react.find();
+    const react = await React.find({ post: postId });
+    //! consol undefined but it work 😒
+    console.log(react.react);
+
+    const reactLength = react.length;
+    if (reactLength === 0) {
+      return res.status(401).json("no react for this post");
+    }
 
     return res.status(200).json(react);
   } catch (err) {
@@ -52,7 +52,9 @@ const deleteReact = async (req, res) => {
 };
 
 module.exports.newReact = newReact;
-module.exports.dislike = dislike;
 
-module.exports.getReacts = getReacts;
+
+
+
+module.exports.getReactsByPost = getReactsByPost;
 module.exports.deleteReact = deleteReact;

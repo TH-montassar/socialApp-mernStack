@@ -13,6 +13,8 @@ const {
   newReact,
   getReacts,
   deleteReact,
+  getReactsByPost,
+  like,
 } = require("../controllers/react.controllers");
 const {
   createPost,
@@ -33,6 +35,7 @@ const Post = require("../models/post.models");
 
 const React = require("../models/react.models");
 const { isReactOwner } = require("../middlewares/isReactOwner");
+const { activity } = require("../middlewares/activity");
 
 router.param("react", async (req, res, next, id) => {
   try {
@@ -69,7 +72,7 @@ router.param("post", async (req, res, next, id) => {
     const post = await Post.findById(id);
 
     if (!post) {
-      return res.status(404).json("not found");
+      return res.status(404).json("not found post");
     } else {
       req.post = post;
       next();
@@ -87,7 +90,7 @@ router.get("/me", verifyToken, getMyPost);
 router.delete("/:post", verifyToken, isPostOwner, deletePost);
 // ----------------------------comments----------
 router.post("/:post/:comment", verifyToken, createCommentReplay);
-router.post("/:post", verifyToken, createComment);
+router.post("/:post", verifyToken,activity ,createComment);
 router.put(
   "/:post/comments/:comment",
   verifyToken,
@@ -103,8 +106,8 @@ router.delete(
   deleteComment
 );
 // ----------------------------Reacts----------
-router.post("/:post/react", verifyToken, newReact);
-router.put("/:post/dislike/:react", verifyToken, dislike);
-router.get("/:post", verifyToken, getReacts);
-router.delete("/:post/delete/:react", isReactOwner, verifyToken, deleteReact);
+router.post("/:post/reacts/like", verifyToken, newReact);
+router.post("/:post/reacts/dislike", verifyToken,newReact);
+router.get("/:post/reacts", verifyToken, getReactsByPost);
+router.delete("/:post/reacts/:react", isReactOwner, verifyToken, deleteReact);
 module.exports = router;

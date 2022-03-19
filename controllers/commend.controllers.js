@@ -10,12 +10,12 @@ const createComment = async (req, res) => {
 console.log(newComment)
   try {
     const savedComment = await newComment.save();
-    const newActivity = new Activity({
-      activity: savedComment._id,
-      activityModel: "Comment",
-      user: req.verifiedUser._id,
-    });
-    const savedActivity = await newActivity.save();
+    // const newActivity = new Activity({
+    //   activity: savedComment._id,
+    //   activityModel: "Comment",
+    //   user: req.verifiedUser._id,
+    // });
+    // const savedActivity = await newActivity.save();
     return res.status(201).json(savedComment);
   } catch (err) {
     return res.status(500).json(err);

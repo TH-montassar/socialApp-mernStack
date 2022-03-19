@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const router = require("./controllers/user.controllers");
+
 //db connection
 mongoose.connect(process.env.MONGO_DB_URI);
 mongoose.connection.on("connected", () => {
@@ -19,6 +19,7 @@ const userRouter = require("./routes/user.routes");
 //const reactRouter = require("./routes/react.routes");
 const messageRoutes = require("./routes/message.routes");
 const postRoutes = require("./routes/post.routes");
+const relationshipRouter = require("./routes/relationship.routes");
 
 //middelware
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use("/api/users", userRouter);
 //app.use("/api/reacts", reactRouter);
 app.use("/api/messages", messageRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/friends",relationshipRouter)
 
 const port = process.env.PORT || 8000;
 
