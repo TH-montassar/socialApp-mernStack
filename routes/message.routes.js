@@ -3,7 +3,7 @@ const {
   getMessages,
   deleteMessage,
 } = require("../controllers/message.controllers");
-const verifyToken = require("../middlewares/verifyToken");
+const verifyToken = require("../middleware/verifyToken");
 
 const router = require("express").Router();
 

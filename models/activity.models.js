@@ -11,7 +11,7 @@ const ActivitySchema = new mongoose.Schema(
     activityModel: {
       type: String,
       required: true,
-      enum: ["Post", "Comment", "Message", "React", "Relations"],
+      enum: ["Post", "Comment", "Message", "Reaction", "Relations"],
     },
   },
   { timestamps: true }

@@ -11,12 +11,12 @@ const getProfile = async (req, res) => {
   }
 };
 
-const getOwnedProfile = async (req, res) => {
+const getMyProfile = async (req, res) => {
   const profileId = req.verifiedUser.profile;
-  console.log(profileId);
+  //console.log("porfile id from current use",profileId);
   try {
     const profile = await Profile.findById(profileId);
-    console.log(profile);
+    //console.log(profile);
     return res.status(200).json(profile);
   } catch (err) {
     return res.status(500).json(err);
@@ -39,6 +39,19 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const updateProfillee = async (req, res) => {
+  const user = req.verifiedUser.profile;
+  try {
+    const updateProfile = await Profile.findByIdAndUpdate(user, req.body, {
+      new: true,
+    });
+    return res.status(200).json(updateProfile);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+module.exports.updateProfillee = updateProfillee;
 module.exports.getProfile = getProfile;
 module.exports.updateProfile = updateProfile;
-module.exports.getOwnedProfile = getOwnedProfile;
+module.exports.getMyProfile = getMyProfile;

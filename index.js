@@ -16,7 +16,7 @@ mongoose.connection.on("error", (err) => {
 //import routes
 const userRouter = require("./routes/user.routes");
 //const commentRouter = require("./routes/comment.routes");
-//const reactRouter = require("./routes/react.routes");
+//const reactionRouter = require("./routes/reaction.routes");
 const messageRoutes = require("./routes/message.routes");
 const postRoutes = require("./routes/post.routes");
 const authRouter = require("./routes/auth.routes");

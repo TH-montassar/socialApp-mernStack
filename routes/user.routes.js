@@ -1,7 +1,10 @@
+const router = require("express").Router();
+
 const {
   getProfile,
   updateProfile,
-  getOwnedProfile,
+  getMyProfile,
+  updateProfillee,
 } = require("../controllers/profile.controllers");
 const {
   sendFriendRequest,
@@ -10,15 +13,14 @@ const {
   getFriend,
   getFriends,
 } = require("../controllers/relationship.controllers");
-
-const { isProfileOwner } = require("../middlewares/isProfileOwner");
-const verifyToken = require("../middlewares/verifyToken");
+const { getMyActivities } = require("../controllers/activity.controllers");
+//
 const Profile = require("../models/profile.models");
 const User = require("../models/user.models");
-
 const Relationship = require("../models/relationship.models");
-const router = require("express").Router();
-
+//
+const { verifyToken, isProfileOwner } = require("../middleware");
+//
 router.param("user", async (req, res, next, id) => {
   try {
     const user = await User.findById(id);
@@ -62,18 +64,21 @@ router.param("relationship", async (req, res, next, id) => {
     return res.status(500).json(err);
   }
 });
-//-------------relationship--------------
+//relationship
 router.post("/:user/", verifyToken, sendFriendRequest);
 
 router.delete("/:user/:relationship", verifyToken, rejectFriendRequest);
 router.put("/:user/acceptFriend", verifyToken, acceptFriendRequest);
-router.get("/friends", verifyToken,getFriends);
+router.get("/friends", verifyToken, getFriends);
 
-//-------------relationship--------------
+//profile
+//! 3lech lezmha  /:user/:profile  kol user ya3mel update ken ll profile mte3o
 router.put("/:user/:profile", verifyToken, isProfileOwner, updateProfile);
 
+router.put("/profile", verifyToken, updateProfillee);
 router.get("/:user/profile", verifyToken, getProfile);
-router.get("/myProfile", verifyToken, getOwnedProfile);
+router.get("/Profile/me", verifyToken, getMyProfile);
 
-
+//user activity
+router.get("/activity/me", verifyToken, getMyActivities);
 module.exports = router;

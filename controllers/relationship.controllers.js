@@ -14,9 +14,9 @@ const sendFriendRequest = async (req, res) => {
   const newRelationship = new Relationship({
     status: "requested",
     receiver: receiver,
-    user: currentUser,
+    sender: currentUser,
   });
-
+  
   try {
     const savedRelationship = await newRelationship.save();
 
@@ -31,7 +31,7 @@ const acceptFriendRequest = async (req, res) => {
   const relationship = await Relationship.findById({ receiver: currentUser });
 
   const user = req.user._id;
-  if (! relationship._id ) {
+  if (!relationship._id) {
     return res.status(401).json(" no friend req for you");
   }
 
