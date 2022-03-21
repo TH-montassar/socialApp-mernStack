@@ -17,7 +17,7 @@ const createComment = async (req, res) => {
   }
 };
 
-const createCommentReplay = async (req, res) => {
+const createCommentReplay = async (req, res, next) => {
   const previousComment = req.comment._id;
 
   const newComment = new Comment({
@@ -34,7 +34,8 @@ const createCommentReplay = async (req, res) => {
       model: "Comment",
       action: "createReplay",
     };
-    return res.status(201).json(savedComment);
+    res.status(201).json(savedComment);
+    return next();
   } catch (err) {
     return res.status(500).json(err);
   }

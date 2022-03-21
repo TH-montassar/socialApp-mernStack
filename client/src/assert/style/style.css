@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Satisfy');
 @font-face {
     font-family: HoboStd;
-    src: url('./fonts/HoboStd.ttf'), url('./fonts/HoboStd.eot');
+    src: url('../../fonts/HoboStd.ttf'), url('../../fonts/HoboStd.eot');
 }
 
 
@@ -202,7 +202,7 @@ section {
 }
 
 .pattern:before {
-    background: #088dcd url("./assert/dot-pattern.png") repeat scroll 0 0;
+    background: #088dcd url("../assert/dot-pattern.png") repeat scroll 0 0;
     opacity: 0.45;
 }
 
@@ -2508,7 +2508,7 @@ footer .logo {
 }
 
 .theme-layout::before {
-    background: url(./assert/dot-pattern.png);
+    background: url(../assert/dot-pattern.png);
     background-repeat: repeat;
     content: "";
     height: 100%;

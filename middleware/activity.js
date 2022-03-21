@@ -1,5 +1,5 @@
 const Activity = require("../models/activity.models");
-module.exports.activity = async (req, res, next) => {
+module.exports.activity = async (req, res) => {
   const activity = res.activity;
   console.log(activity)
   try {
@@ -13,6 +13,6 @@ module.exports.activity = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   } finally {
-    next();
+    return res.end();
   }
 };

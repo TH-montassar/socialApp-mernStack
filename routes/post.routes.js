@@ -83,7 +83,7 @@ router.post("/", verifyToken, createPost, activity);
 router.put("/:post", verifyToken, isPostOwner, updatePost);
 router.get("/", getPosts);
 router.get("/me", verifyToken, getMyPost);
-router.delete("/:post", verifyToken, isPostOwner, deletePost, activity);
+router.delete("/:post", verifyToken, isPostOwner, deletePost);
 //comment routes
 
 router.post("/:post/comments", verifyToken, createComment, activity);

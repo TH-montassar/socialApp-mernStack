@@ -1,6 +1,6 @@
 const Post = require("../models/post.models");
 
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
   try {
     const newPost = new Post({
       content: req.body.content,
@@ -11,13 +11,15 @@ const createPost = async (req, res) => {
     const savedPost = await newPost.save();
     res.activity = { id: savedPost._id, model: "Post", action: "create" };
 
-    return res.status(201).json(savedPost);
+    res.status(201).json(savedPost);
+    return next();
+
   } catch (err) {
     return res.status(500).json(err);
   }
 };
 
-const sharePost = async (req, res) => {
+const sharePost = async (req, res,next) => {
   const previousPost = req.post._id;
 
   const newPost = new Post({
@@ -29,7 +31,8 @@ const sharePost = async (req, res) => {
   try {
     const savedPost = await newPost.save();
     res.activity = { id: savedPost._id, model: "Post", action: "sharePost" };
-    return res.status(201).json(savedPost);
+     res.status(201).json(savedPost);
+     return next();
   } catch (err) {
     return res.status(500).json(err);
   }
