@@ -27,13 +27,10 @@ const {
   isCommentOwner,
   isReactionOwner,
   activity,
-  verifyToken
-
+  verifyToken,
 } = require("../middleware");
 
-
-
-//best methode
+//best method
 
 router.param("reaction", async (req, res, next, id) => {
   try {
@@ -81,16 +78,16 @@ router.param("post", async (req, res, next, id) => {
 });
 
 // posts routes
-router.post("/:post/share", verifyToken, sharePost);
-router.post("/", verifyToken, createPost);
+router.post("/:post/share", verifyToken,sharePost,activity);
+router.post("/", verifyToken, createPost, activity);
 router.put("/:post", verifyToken, isPostOwner, updatePost);
 router.get("/", getPosts);
 router.get("/me", verifyToken, getMyPost);
-router.delete("/:post", verifyToken, isPostOwner, deletePost);
+router.delete("/:post", verifyToken, isPostOwner, deletePost, activity);
 //comment routes
 
 router.post("/:post/comments", verifyToken, createComment, activity);
-router.post("/:post/:comment", verifyToken, createCommentReplay);
+router.post("/:post/:comment", verifyToken, createCommentReplay, activity);
 router.get("/:post/comments", verifyToken, getComments);
 router.put(
   "/:post/comments/:comment",
@@ -106,13 +103,14 @@ router.delete(
 );
 
 // Reactions routes
-router.post("/:post/reactions/like", verifyToken, newReaction);
-router.post("/:post/reactions/dislike", verifyToken, newReaction);
+router.post("/:post/reactions/like", verifyToken, newReaction, activity);
+router.post("/:post/reactions/dislike", verifyToken, newReaction, activity);
 
 router.delete(
   "/:post/reactions/:reaction",
-  isReactionOwner,
+
   verifyToken,
+  isReactionOwner,
   deleteReaction
 );
 

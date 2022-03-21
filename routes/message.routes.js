@@ -3,12 +3,13 @@ const {
   getMessages,
   deleteMessage,
 } = require("../controllers/message.controllers");
+const { activity } = require("../middleware");
 const verifyToken = require("../middleware/verifyToken");
 
 const router = require("express").Router();
 
-router.post("/", verifyToken, createMessage);
-router.get("/", verifyToken, getMessages);
+router.post("/", verifyToken,activity, createMessage);
+
 
 router.delete("/deleteMessage/:messageId", verifyToken, deleteMessage);
 

@@ -9,9 +9,9 @@ const newReaction = async (req, res) => {
       post: req.post._id,
     });
 
-    const savedComment = await newReaction.save();
-
-    return res.status(201).json(savedComment);
+    const savedReaction = await newReaction.save();
+    res.activity = { id: savedPost._id, model: "Reaction", action: "Reaction" };
+    return res.status(201).json(savedReaction);
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -20,8 +20,8 @@ const newReaction = async (req, res) => {
 const deleteReaction = async (req, res) => {
   const reaction = req.reaction;
   try {
-    const deleteReaction = await reaction.findByIdAndDelete(reaction._id);
-    return res.status(200).json(deleteReaction);
+    await Reaction.findByIdAndDelete(reaction._id);
+    return res.status(204).json("deleteReaction");
   } catch (err) {
     return res.status(500).json(err);
   }

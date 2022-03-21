@@ -10,8 +10,8 @@ const {
   sendFriendRequest,
   rejectFriendRequest,
   acceptFriendRequest,
-  getFriend,
-  getFriends,
+  blockFriend,
+  getOwnedRelationship,
 } = require("../controllers/relationship.controllers");
 const { getMyActivities } = require("../controllers/activity.controllers");
 //
@@ -19,7 +19,13 @@ const Profile = require("../models/profile.models");
 const User = require("../models/user.models");
 const Relationship = require("../models/relationship.models");
 //
-const { verifyToken, isProfileOwner } = require("../middleware");
+const {
+  verifyToken,
+  isProfileOwner,
+  isRelationshipOwner,
+  activity,
+} = require("../middleware");
+const { getMessages } = require("../controllers/message.controllers");
 //
 router.param("user", async (req, res, next, id) => {
   try {
@@ -64,14 +70,35 @@ router.param("relationship", async (req, res, next, id) => {
     return res.status(500).json(err);
   }
 });
-//relationship
-router.post("/:user/", verifyToken, sendFriendRequest);
+//relationship router
+router.post("/:user/relationships/addFriend", verifyToken, sendFriendRequest,activity);
+//!update my relation
+router.put(
+  "/relationships/:relationship/accept",
+  verifyToken,
+  isRelationshipOwner,
+  acceptFriendRequest,activity
+);
+//!delete  my relation
+router.delete(
+  "/relationships/:relationship/reject",
+  verifyToken,
+  isRelationshipOwner,
+  rejectFriendRequest
+);
+// block any user (no friend)
+router.post("/:user/relationships/block", verifyToken, blockFriend);
+//!whey user:
+router.put(
+  "/relationships/:relationship/block",
+  verifyToken,
+  isRelationshipOwner,
+  blockFriend
+);
 
-router.delete("/:user/:relationship", verifyToken, rejectFriendRequest);
-router.put("/:user/acceptFriend", verifyToken, acceptFriendRequest);
-router.get("/friends", verifyToken, getFriends);
+router.get("/relationships", verifyToken,getOwnedRelationship);
 
-//profile
+//profile router
 //! 3lech lezmha  /:user/:profile  kol user ya3mel update ken ll profile mte3o
 router.put("/:user/:profile", verifyToken, isProfileOwner, updateProfile);
 
@@ -81,4 +108,6 @@ router.get("/Profile/me", verifyToken, getMyProfile);
 
 //user activity
 router.get("/activity/me", verifyToken, getMyActivities);
+//messages
+router.get("/:user/conversation", verifyToken, getMessages);
 module.exports = router;

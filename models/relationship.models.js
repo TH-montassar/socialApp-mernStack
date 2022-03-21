@@ -4,8 +4,8 @@ const RelationshipSchema = new mongoose.Schema(
   {
     status: {
       type: String,
-      enum: ["friend", "blocked", "pending", "requested"],
-      default: "pending",
+      enum: ["friends", "blocked", "requested"],
+      default: "requested",
     },
     receiver: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     sender: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

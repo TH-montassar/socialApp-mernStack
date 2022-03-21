@@ -17,7 +17,7 @@ mongoose.connection.on("error", (err) => {
 const userRouter = require("./routes/user.routes");
 //const commentRouter = require("./routes/comment.routes");
 //const reactionRouter = require("./routes/reaction.routes");
-const messageRoutes = require("./routes/message.routes");
+//const messageRoutes = require("./routes/message.routes");
 const postRoutes = require("./routes/post.routes");
 const authRouter = require("./routes/auth.routes");
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 //routes middleware
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/messages", messageRoutes);
+//app.use("/api/messages", messageRoutes);
 app.use("/api/posts", postRoutes);
 
 const port = process.env.PORT || 8000;

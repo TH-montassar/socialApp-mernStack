@@ -1,4 +1,3 @@
-
 const Post = require("../models/post.models");
 
 const createPost = async (req, res) => {
@@ -10,14 +9,7 @@ const createPost = async (req, res) => {
       image: req.body.image,
     });
     const savedPost = await newPost.save();
-    console.log(savedPost);
-    // const newActivity = new Activity({
-    //   activity: "post",
-    //   post: req.post._id,
-    // });
-
-    // const savedActivity = await newActivity.save();
-    // console.log(savedActivity);
+    res.activity = { id: savedPost._id, model: "Post", action: "create" };
 
     return res.status(201).json(savedPost);
   } catch (err) {
@@ -36,7 +28,7 @@ const sharePost = async (req, res) => {
 
   try {
     const savedPost = await newPost.save();
-
+    res.activity = { id: savedPost._id, model: "Post", action: "sharePost" };
     return res.status(201).json(savedPost);
   } catch (err) {
     return res.status(500).json(err);

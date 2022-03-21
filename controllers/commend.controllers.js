@@ -7,15 +7,10 @@ const createComment = async (req, res) => {
     author: req.verifiedUser._id,
     post: req.post._id,
   });
-console.log(newComment)
+  console.log(newComment);
   try {
     const savedComment = await newComment.save();
-    // const newActivity = new Activity({
-    //   activity: savedComment._id,
-    //   activityModel: "Comment",
-    //   user: req.verifiedUser._id,
-    // });
-    // const savedActivity = await newActivity.save();
+    res.activity = { id: savedComment._id, model: "Comment", action: "create" };
     return res.status(201).json(savedComment);
   } catch (err) {
     return res.status(500).json(err);
@@ -34,7 +29,11 @@ const createCommentReplay = async (req, res) => {
 
   try {
     const savedComment = await newComment.save();
-
+    res.activity = {
+      id: savedComment._id,
+      model: "Comment",
+      action: "createReplay",
+    };
     return res.status(201).json(savedComment);
   } catch (err) {
     return res.status(500).json(err);

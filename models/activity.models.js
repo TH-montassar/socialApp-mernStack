@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const ActivitySchema = new mongoose.Schema(
   {
+    action: { type: String },
     activity: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -11,7 +12,7 @@ const ActivitySchema = new mongoose.Schema(
     activityModel: {
       type: String,
       required: true,
-      enum: ["Post", "Comment", "Message", "Reaction", "Relations"],
+      enum: ["Post", "Comment", "Message", "Reaction", "relationship"],
     },
   },
   { timestamps: true }

@@ -9,6 +9,7 @@ const createMessage = async (req, res) => {
 
   try {
     const savedMessage = await newMessage.save();
+    res.activity = { id: savedMessage._id, model: "Message", action: "send" };
 
     return res.status(201).json(savedMessage);
   } catch (err) {
@@ -16,16 +17,26 @@ const createMessage = async (req, res) => {
   }
 };
 
-
 const getMessages = async (req, res) => {
+  const currentUser = req.verifiedUser._id;
+  const user = req.user._id.toString();
+  console.log(currentUser, " currentUser");
+  console.log(user, " user");
   try {
-    const Messages = await Message.find();
-
-    return res.status(200).json(Messages);
+    const messages = await Message.find();
+    if (
+      (messages.sender === currentUser && messages.receiver === user) ||
+      (messages.receiver === currentUser && messages.sender === user)
+    ) {
+      return res.status(200).json(messages);
+    } else {
+      return res.status(200).json("no message ");
+    }
   } catch (err) {
     return res.status(500).json(err);
   }
 };
+
 //filterComment
 
 const deleteMessage = async (req, res) => {
