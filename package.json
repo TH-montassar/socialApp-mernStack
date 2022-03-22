@@ -7,21 +7,21 @@
     "client:dev": "cd client && npm start",
     "server:dev": "nodemon index.js",
     "start": "node index.js",
-
-    "dev":"concurrently -n'server,client' -c'green,blue' \"npm run server:dev\" \"npm run client:dev\""
-   
-
-
+    "dev": "concurrently -n'server,client' -c'green,blue' \"npm run server:dev\" \"npm run client:dev\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "concurrently": "^7.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.6"
+    "mongoose": "^6.2.6",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4"
   }
 }

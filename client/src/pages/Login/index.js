@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "../../actions/auth.action";
+import logo from "../../assets/images/wink.png";
 const Login = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => {
@@ -40,7 +41,7 @@ const Login = () => {
                 </p>
                 <div className="friend-logo">
                   <span>
-                    <img src="images/wink.png" alt="" />
+                    <img src={logo} alt="" />
                   </span>
                 </div>
                 <a href="#" title="" className="folow-me">
@@ -74,7 +75,7 @@ const Login = () => {
                       autoComplete="email"
                       required
                     />
-                    <label className="control-label" htmlFor="email">
+                    <label className="control-label" htmlhtmlFor="email">
                       email
                     </label>
                     <i className="mtrl-select"></i>
@@ -89,7 +90,7 @@ const Login = () => {
                       id="password"
                       required
                     />
-                    <label className="control-label" htmlFor="password">
+                    <label className="control-label" htmlhtmlFor="password">
                       Password
                     </label>
                     <i className="mtrl-select"></i>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { register } from "../../actions/auth.action";
-
+import logo from "../../assets/images/wink.png";
 const Register = () => {
   const dispatch = useDispatch();
   const [Form, setForm] = useState({
@@ -50,7 +50,7 @@ const Register = () => {
                 </p>
                 <div className="friend-logo">
                   <span>
-                    <img src="" alt="" />
+                    <img src={logo} alt="" />
                   </span>
                 </div>
                 <a href="#" title="" className="folow-me">
@@ -86,7 +86,7 @@ const Register = () => {
                       id="firstName"
                       required
                     />
-                    <label className="control-label" htmlFor="input">
+                    <label className="control-label" htmlhtmlFor="input">
                       First Name
                     </label>
                     <i className="mtrl-select"></i>
@@ -102,7 +102,7 @@ const Register = () => {
                       id="lastName"
                       required
                     />
-                    <label className="control-label" htmlFor="input">
+                    <label className="control-label" htmlhtmlFor="input">
                       Last Name
                     </label>
                     <i className="mtrl-select"></i>
@@ -118,7 +118,7 @@ const Register = () => {
                       name="number"
                       id="number"
                     />
-                    <label className="control-label" htmlFor="number">
+                    <label className="control-label" htmlhtmlFor="number">
                       number
                     </label>
                     <i className="mtrl-select"></i>
@@ -133,7 +133,7 @@ const Register = () => {
                       name="password"
                       id="password"
                     />
-                    <label className="control-label" htmlFor="password">
+                    <label className="control-label" htmlhtmlFor="password">
                       Password
                     </label>
                     <i className="mtrl-select"></i>
@@ -148,7 +148,10 @@ const Register = () => {
                       id="confirmPassword"
                       required
                     />
-                    <label className="control-label" htmlFor="confirmPassword">
+                    <label
+                      className="control-label"
+                      htmlhtmlFor="confirmPassword"
+                    >
                       confirm Password
                     </label>
                     <i className="mtrl-select"></i>
@@ -179,7 +182,7 @@ const Register = () => {
                       autoComplete="email"
                       required
                     />
-                    <label className="control-label" htmlFor="input">
+                    <label className="control-label" htmlhtmlFor="input">
                       <a
                         href="https://wpkixx.com/cdn-cgi/l/email-protection"
                         className="__cf_email__"
