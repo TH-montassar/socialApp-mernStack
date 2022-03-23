@@ -252,11 +252,6 @@ section {
     background: #f4f2f2;
 }
 
-[type="submit"],
-button,
-html [type="button"] {
-    cursor: pointer;
-}
 
 textarea {
     resize: none;
@@ -1300,13 +1295,6 @@ textarea {
     border-bottom: 0;
 }
 
-form button {
-    border: medium none;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 3px 10px;
-}
 
 .attachments .fileContainer [type="file"] {
     right: 6px;
@@ -1922,12 +1910,7 @@ li.post-comment .comet-avatar {
     transform: scale(1.1);
 }
 
-.post-comt-box form button {
-    bottom: 2px;
-    position: absolute;
-    right: 0;
-    background: none;
-}
+
 
 
 /*--- search friend widget ---*/
