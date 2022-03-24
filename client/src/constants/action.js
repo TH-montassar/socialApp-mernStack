@@ -7,6 +7,7 @@ export const AUTH_ERROR = "AUTH_ERROR";
 
 
 export const GET_POST = "GET_POST";
+export const GET_MY_POST = "GET_MY_POST";
 export const POST_ERROR = "POST_ERROR";
 export const ADD_POST = "ADD_POST";
 export const  GET_POST_WITH_COMMENT = "GET_POST_WITH_COMMENT";

@@ -1,29 +1,304 @@
-/* Creating a React component called "App" and setting it to display the logo. */
+/* Creating Link React component called "App" and setting it to display the logo. */
 import React from "react";
-import logo from "../../assets/images/logo2.png";
+import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>
-      <div className="responsive-header">
+      <div className="topbar stick">
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
+        </div>
+
+        <div className="top-area">
+          <ul className="main-menu">
+            <li>
+              <Link to="/" title="">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/profile" title="">
+                timeline
+              </Link>
+            </li>
+            <li>
+              <Link to="#" title="">
+                account settings
+              </Link>
+              <ul>
+                <li>
+                  <Link to="edit-account-setting.html" title="">
+                    edit account setting
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="edit-password.html" title="">
+                    edit-password
+                  </Link>
+                </li>
+                <li>
+                  <Link to="edit-profile-basic.html" title="">
+                    edit profile basics
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="messages.html" title="">
+                    message box
+                  </Link>
+                </li>
+                <li>
+                  <Link to="inbox.html" title="">
+                    Inbox
+                  </Link>
+                </li>
+                <li>
+                  <Link to="notifications.html" title="">
+                    notifications page
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link to="#" title="">
+                more pages
+              </Link>
+            </li>
+          </ul>
+          <ul className="setting-area">
+            <li>
+              <Link to="#" title="Home" data-ripple="">
+                <i className="ti-search"></i>
+              </Link>
+              <div className="searched">
+                <form method="post" className="form-search">
+                  <input type="text" placeholder="Search Friend" />
+                  <button data-ripple>
+                    <i className="ti-search"></i>
+                  </button>
+                </form>
+              </div>
+            </li>
+            <li>
+              <Link to="newsfeed.html" title="Home" data-ripple="">
+                <i className="ti-home"></i>
+              </Link>
+            </li>
+            <li>
+              <Link to="#" title="Notification" data-ripple="">
+                <i className="ti-bell"></i>
+                <span>20</span>
+              </Link>
+              <div className="dropdowns">
+                <span>4 New Notifications</span>
+                <ul className="drops-menu">
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-1.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>sarah Loren</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag green">New</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-2.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Jhon doe</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag red">Reply</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-3.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Andrew</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag blue">Unseen</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-4.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Tom cruse</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag">New</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-5.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Amy</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag">New</span>
+                  </li>
+                </ul>
+                <Link to="notifications.html" title="" className="more-mesg">
+                  view more
+                </Link>
+              </div>
+            </li>
+            <li>
+              <Link to="#" title="Messages" data-ripple="">
+                <i className="ti-comment"></i>
+                <span>12</span>
+              </Link>
+              <div className="dropdowns">
+                <span>5 New Messages</span>
+                <ul className="drops-menu">
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-1.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>sarah Loren</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag green">New</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-2.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Jhon doe</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag red">Reply</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-3.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Andrew</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag blue">Unseen</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-4.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Tom cruse</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag">New</span>
+                  </li>
+                  <li>
+                    <Link to="notifications.html" title="">
+                      <img src="images/resources/thumb-5.jpg" alt="" />
+                      <div className="mesg-meta">
+                        <h6>Amy</h6>
+                        <span>Hi, how r u dear ...?</span>
+                        <i>2 min ago</i>
+                      </div>
+                    </Link>
+                    <span className="tag">New</span>
+                  </li>
+                </ul>
+                <Link to="messages.html" title="" className="more-mesg">
+                  view more
+                </Link>
+              </div>
+            </li>
+            <li>
+              <Link to="#" title="Languages" data-ripple="">
+                <i className="fa fa-globe"></i>
+              </Link>
+              <div className="dropdowns languages">
+                <Link to="#" title="">
+                  <i className="ti-check"></i>English
+                </Link>
+                <Link to="#" title="">
+                  Arabic
+                </Link>
+                <Link to="#" title="">
+                  Dutch
+                </Link>
+                <Link to="#" title="">
+                  French
+                </Link>
+              </div>
+            </li>
+          </ul>
+          <div className="user-img">
+            <img src="images/resources/admin.jpg" alt="" />
+            <span className="status f-online"></span>
+            <div className="user-setting">
+              <Link to="#" title="">
+                <span className="status f-online"></span>online
+              </Link>
+              <Link to="#" title="">
+                <span className="status f-away"></span>away
+              </Link>
+              <Link to="#" title="">
+                <span className="status f-off"></span>offline
+              </Link>
+              <Link to="#" title="">
+                <i className="ti-user"></i> view profile
+              </Link>
+              <Link to="#" title="">
+                <i className="ti-pencil-alt"></i>edit profile
+              </Link>
+              <Link to="#" title="">
+                <i className="ti-target"></i>activity log
+              </Link>
+              <Link to="#" title="">
+                <i className="ti-settings"></i>account setting
+              </Link>
+              <Link to="#" title="">
+                <i className="ti-power-off"></i>log out
+              </Link>
+            </div>
+          </div>
+          <span className="ti-menu main-menu" data-ripple=""></span>
+        </div>
+      </div>
+      {/* <div className="responsive-header">
         <div className="mh-head first Sticky">
           <span className="mh-btns-left">
-            <a className="" href="#menu">
+            <Link className="" to="#menu">
               <i className="fa fa-align-justify"></i>
-            </a>
+            </Link>
           </span>
           <span className="mh-text">
-            <a href="newsfeed.html" title="">
+            <Link to="newsfeed.html" title="">
               <img src={logo} alt="" />
-            </a>
+            </Link>
           </span>
           <span className="mh-btns-right">
-            <a className="fa fa-sliders" href="#shoppingbag"></a>
+            <Link className="fa fa-sliders" to="#shoppingbag"></Link>
           </span>
         </div>
         <div className="mh-head second">
           <form className="mh-form">
             <input placeholder="search" />
-            <a href="#/" className="fa fa-search"></a>
+            <Link to="#/" className="fa fa-search"></Link>
           </form>
         </div>
         <nav id="menu" className="res-menu">
@@ -32,34 +307,34 @@ const Header = () => {
               <span>Home</span>
               <ul>
                 <li>
-                  <a href="index-2.html" title="">
+                  <Link to="index-2.html" title="">
                     Home Social
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="index2.html" title="">
+                  <Link to="index2.html" title="">
                     Home Social 2
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="index-company.html" title="">
+                  <Link to="index-company.html" title="">
                     Home Company
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="landing.html" title="">
+                  <Link to="landing.html" title="">
                     Login page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="logout.html" title="">
+                  <Link to="logout.html" title="">
                     Logout Page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="newsfeed.html" title="">
+                  <Link to="newsfeed.html" title="">
                     news feed
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -67,54 +342,54 @@ const Header = () => {
               <span>Time Line</span>
               <ul>
                 <li>
-                  <a href="time-line.html" title="">
+                  <Link to="time-line.html" title="">
                     timeline
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="timeline-friends.html" title="">
+                  <Link to="timeline-friends.html" title="">
                     timeline friends
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="timeline-groups.html" title="">
+                  <Link to="timeline-groups.html" title="">
                     timeline groups
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="timeline-pages.html" title="">
+                  <Link to="timeline-pages.html" title="">
                     timeline pages
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="timeline-photos.html" title="">
+                  <Link to="timeline-photos.html" title="">
                     timeline photos
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="timeline-videos.html" title="">
+                  <Link to="timeline-videos.html" title="">
                     timeline videos
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="fav-page.html" title="">
+                  <Link to="fav-page.html" title="">
                     favourit page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="groups.html" title="">
+                  <Link to="groups.html" title="">
                     groups page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="page-likers.html" title="">
+                  <Link to="page-likers.html" title="">
                     Likes page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="people-nearby.html" title="">
+                  <Link to="people-nearby.html" title="">
                     people nearby
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -122,49 +397,49 @@ const Header = () => {
               <span>Account Setting</span>
               <ul>
                 <li>
-                  <a href="create-fav-page.html" title="">
+                  <Link to="create-fav-page.html" title="">
                     create fav page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="edit-account-setting.html" title="">
+                  <Link to="edit-account-setting.html" title="">
                     edit account setting
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="edit-interest.html" title="">
+                  <Link to="edit-interest.html" title="">
                     edit-interest
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="edit-password.html" title="">
+                  <Link to="edit-password.html" title="">
                     edit-password
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="edit-profile-basic.html" title="">
+                  <Link to="edit-profile-basic.html" title="">
                     edit profile basics
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="edit-work-eductation.html" title="">
+                  <Link to="edit-work-eductation.html" title="">
                     edit work educations
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="messages.html" title="">
+                  <Link to="messages.html" title="">
                     message box
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="inbox.html" title="">
+                  <Link to="inbox.html" title="">
                     Inbox
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="notifications.html" title="">
+                  <Link to="notifications.html" title="">
                     notifications page
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -172,24 +447,24 @@ const Header = () => {
               <span>forum</span>
               <ul>
                 <li>
-                  <a href="forum.html" title="">
+                  <Link to="forum.html" title="">
                     Forum Page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="forums-category.html" title="">
+                  <Link to="forums-category.html" title="">
                     Fourm Category
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="forum-open-topic.html" title="">
+                  <Link to="forum-open-topic.html" title="">
                     Forum Open Topic
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="forum-create-topic.html" title="">
+                  <Link to="forum-create-topic.html" title="">
                     Forum Create Topic
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -197,29 +472,29 @@ const Header = () => {
               <span>Our Shop</span>
               <ul>
                 <li>
-                  <a href="shop.html" title="">
+                  <Link to="shop.html" title="">
                     Shop Products
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="shop-masonry.html" title="">
+                  <Link to="shop-masonry.html" title="">
                     Shop Masonry Products
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="shop-single.html" title="">
+                  <Link to="shop-single.html" title="">
                     Shop Detail Page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="shop-cart.html" title="">
+                  <Link to="shop-cart.html" title="">
                     Shop Product Cart
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="shop-checkout.html" title="">
+                  <Link to="shop-checkout.html" title="">
                     Product Checkout
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -227,44 +502,44 @@ const Header = () => {
               <span>Our Blog</span>
               <ul>
                 <li>
-                  <a href="blog-grid-wo-sidebar.html" title="">
+                  <Link to="blog-grid-wo-sidebar.html" title="">
                     Our Blog
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-grid-right-sidebar.html" title="">
+                  <Link to="blog-grid-right-sidebar.html" title="">
                     Blog with R-Sidebar
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-grid-left-sidebar.html" title="">
+                  <Link to="blog-grid-left-sidebar.html" title="">
                     Blog with L-Sidebar
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-masonry.html" title="">
+                  <Link to="blog-masonry.html" title="">
                     Blog Masonry Style
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-list-wo-sidebar.html" title="">
+                  <Link to="blog-list-wo-sidebar.html" title="">
                     Blog List Style
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-list-right-sidebar.html" title="">
+                  <Link to="blog-list-right-sidebar.html" title="">
                     Blog List with R-Sidebar
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-list-left-sidebar.html" title="">
+                  <Link to="blog-list-left-sidebar.html" title="">
                     Blog List with L-Sidebar
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="blog-detail.html" title="">
+                  <Link to="blog-detail.html" title="">
                     Blog Post Detail
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -272,19 +547,19 @@ const Header = () => {
               <span>Portfolio</span>
               <ul>
                 <li>
-                  <a href="portfolio-2colm.html" title="">
+                  <Link to="portfolio-2colm.html" title="">
                     Portfolio 2col
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="portfolio-3colm.html" title="">
+                  <Link to="portfolio-3colm.html" title="">
                     Portfolio 3col
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="portfolio-4colm.html" title="">
+                  <Link to="portfolio-4colm.html" title="">
                     Portfolio 4col
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -292,19 +567,19 @@ const Header = () => {
               <span>Support & Help</span>
               <ul>
                 <li>
-                  <a href="support-and-help.html" title="">
+                  <Link to="support-and-help.html" title="">
                     Support & Help
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="support-and-help-detail.html" title="">
+                  <Link to="support-and-help-detail.html" title="">
                     Support & Help Detail
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="support-and-help-search-result.html" title="">
+                  <Link to="support-and-help-search-result.html" title="">
                     Support & Help Search Result
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -312,66 +587,66 @@ const Header = () => {
               <span>More pages</span>
               <ul>
                 <li>
-                  <a href="careers.html" title="">
+                  <Link to="careers.html" title="">
                     Careers
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="career-detail.html" title="">
+                  <Link to="career-detail.html" title="">
                     Career Detail
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="404.html" title="">
+                  <Link to="404.html" title="">
                     404 error page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="404-2.html" title="">
+                  <Link to="404-2.html" title="">
                     404 Style2
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="faq.html" title="">
+                  <Link to="faq.html" title="">
                     faq's page
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="insights.html" title="">
+                  <Link to="insights.html" title="">
                     insights
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="knowledge-base.html" title="">
+                  <Link to="knowledge-base.html" title="">
                     knowledge base
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="about.html" title="">
+              <Link to="about.html" title="">
                 about
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="about-company.html" title="">
+              <Link to="about-company.html" title="">
                 About Us2
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="contact.html" title="">
+              <Link to="contact.html" title="">
                 contact
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="contact-branches.html" title="">
+              <Link to="contact-branches.html" title="">
                 Contact Us2
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="widgets.html" title="">
+              <Link to="widgets.html" title="">
                 Widgts
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -485,419 +760,11 @@ const Header = () => {
             </div>
           </div>
         </nav>
-      </div>
-      <div className="topbar stick">
-        <div className="logo">
-          <a title="" href="newsfeed.html">
-            <img src="images/logo.png" alt="" />
-          </a>
-        </div>
-
-        <div className="top-area">
-          <ul className="main-menu">
-            <li>
-              <a href="#" title="">
-                Home
-              </a>
-              <ul>
-                <li>
-                  <a href="index-2.html" title="">
-                    Home Social
-                  </a>
-                </li>
-                <li>
-                  <a href="index2.html" title="">
-                    Home Social 2
-                  </a>
-                </li>
-                <li>
-                  <a href="index-company.html" title="">
-                    Home Company
-                  </a>
-                </li>
-                <li>
-                  <a href="landing.html" title="">
-                    Login page
-                  </a>
-                </li>
-                <li>
-                  <a href="logout.html" title="">
-                    Logout Page
-                  </a>
-                </li>
-                <li>
-                  <a href="newsfeed.html" title="">
-                    news feed
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" title="">
-                timeline
-              </a>
-              <ul>
-                <li>
-                  <a href="time-line.html" title="">
-                    timeline
-                  </a>
-                </li>
-                <li>
-                  <a href="timeline-friends.html" title="">
-                    timeline friends
-                  </a>
-                </li>
-                <li>
-                  <a href="timeline-groups.html" title="">
-                    timeline groups
-                  </a>
-                </li>
-                <li>
-                  <a href="timeline-pages.html" title="">
-                    timeline pages
-                  </a>
-                </li>
-                <li>
-                  <a href="timeline-photos.html" title="">
-                    timeline photos
-                  </a>
-                </li>
-                <li>
-                  <a href="timeline-videos.html" title="">
-                    timeline videos
-                  </a>
-                </li>
-                <li>
-                  <a href="fav-page.html" title="">
-                    favourit page
-                  </a>
-                </li>
-                <li>
-                  <a href="groups.html" title="">
-                    groups page
-                  </a>
-                </li>
-                <li>
-                  <a href="page-likers.html" title="">
-                    Likes page
-                  </a>
-                </li>
-                <li>
-                  <a href="people-nearby.html" title="">
-                    people nearby
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" title="">
-                account settings
-              </a>
-              <ul>
-                <li>
-                  <a href="create-fav-page.html" title="">
-                    create fav page
-                  </a>
-                </li>
-                <li>
-                  <a href="edit-account-setting.html" title="">
-                    edit account setting
-                  </a>
-                </li>
-                <li>
-                  <a href="edit-interest.html" title="">
-                    edit-interest
-                  </a>
-                </li>
-                <li>
-                  <a href="edit-password.html" title="">
-                    edit-password
-                  </a>
-                </li>
-                <li>
-                  <a href="edit-profile-basic.html" title="">
-                    edit profile basics
-                  </a>
-                </li>
-                <li>
-                  <a href="edit-work-eductation.html" title="">
-                    edit work educations
-                  </a>
-                </li>
-                <li>
-                  <a href="messages.html" title="">
-                    message box
-                  </a>
-                </li>
-                <li>
-                  <a href="inbox.html" title="">
-                    Inbox
-                  </a>
-                </li>
-                <li>
-                  <a href="notifications.html" title="">
-                    notifications page
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" title="">
-                more pages
-              </a>
-              <ul>
-                <li>
-                  <a href="404.html" title="">
-                    404 error page
-                  </a>
-                </li>
-                <li>
-                  <a href="about.html" title="">
-                    about
-                  </a>
-                </li>
-                <li>
-                  <a href="contact.html" title="">
-                    contact
-                  </a>
-                </li>
-                <li>
-                  <a href="faq.html" title="">
-                    faq's page
-                  </a>
-                </li>
-                <li>
-                  <a href="insights.html" title="">
-                    insights
-                  </a>
-                </li>
-                <li>
-                  <a href="knowledge-base.html" title="">
-                    knowledge base
-                  </a>
-                </li>
-                <li>
-                  <a href="widgets.html" title="">
-                    Widgts
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <ul className="setting-area">
-            <li>
-              <a href="#" title="Home" data-ripple="">
-                <i className="ti-search"></i>
-              </a>
-              <div className="searched">
-                <form method="post" className="form-search">
-                  <input type="text" placeholder="Search Friend" />
-                  <button data-ripple>
-                    <i className="ti-search"></i>
-                  </button>
-                </form>
-              </div>
-            </li>
-            <li>
-              <a href="newsfeed.html" title="Home" data-ripple="">
-                <i className="ti-home"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" title="Notification" data-ripple="">
-                <i className="ti-bell"></i>
-                <span>20</span>
-              </a>
-              <div className="dropdowns">
-                <span>4 New Notifications</span>
-                <ul className="drops-menu">
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-1.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>sarah Loren</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag green">New</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-2.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Jhon doe</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag red">Reply</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-3.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Andrew</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag blue">Unseen</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-4.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Tom cruse</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag">New</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-5.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Amy</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag">New</span>
-                  </li>
-                </ul>
-                <a href="notifications.html" title="" className="more-mesg">
-                  view more
-                </a>
-              </div>
-            </li>
-            <li>
-              <a href="#" title="Messages" data-ripple="">
-                <i className="ti-comment"></i>
-                <span>12</span>
-              </a>
-              <div className="dropdowns">
-                <span>5 New Messages</span>
-                <ul className="drops-menu">
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-1.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>sarah Loren</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag green">New</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-2.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Jhon doe</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag red">Reply</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-3.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Andrew</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag blue">Unseen</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-4.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Tom cruse</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag">New</span>
-                  </li>
-                  <li>
-                    <a href="notifications.html" title="">
-                      <img src="images/resources/thumb-5.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Amy</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </a>
-                    <span className="tag">New</span>
-                  </li>
-                </ul>
-                <a href="messages.html" title="" className="more-mesg">
-                  view more
-                </a>
-              </div>
-            </li>
-            <li>
-              <a href="#" title="Languages" data-ripple="">
-                <i className="fa fa-globe"></i>
-              </a>
-              <div className="dropdowns languages">
-                <a href="#" title="">
-                  <i className="ti-check"></i>English
-                </a>
-                <a href="#" title="">
-                  Arabic
-                </a>
-                <a href="#" title="">
-                  Dutch
-                </a>
-                <a href="#" title="">
-                  French
-                </a>
-              </div>
-            </li>
-          </ul>
-          <div className="user-img">
-            <img src="images/resources/admin.jpg" alt="" />
-            <span className="status f-online"></span>
-            <div className="user-setting">
-              <a href="#" title="">
-                <span className="status f-online"></span>online
-              </a>
-              <a href="#" title="">
-                <span className="status f-away"></span>away
-              </a>
-              <a href="#" title="">
-                <span className="status f-off"></span>offline
-              </a>
-              <a href="#" title="">
-                <i className="ti-user"></i> view profile
-              </a>
-              <a href="#" title="">
-                <i className="ti-pencil-alt"></i>edit profile
-              </a>
-              <a href="#" title="">
-                <i className="ti-target"></i>activity log
-              </a>
-              <a href="#" title="">
-                <i className="ti-settings"></i>account setting
-              </a>
-              <a href="#" title="">
-                <i className="ti-power-off"></i>log out
-              </a>
-            </div>
-          </div>
-          <span className="ti-menu main-menu" data-ripple=""></span>
-        </div>
-      </div>
+      </div> */}
     </header>
   );
 };
 
-/* Creating a React component called Header. */
+/* Creating Link React component called Header. */
 
 export default Header;

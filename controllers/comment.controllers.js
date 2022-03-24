@@ -67,7 +67,11 @@ const getComment = async (req, res) => {
 };
 const getComments = async (req, res) => {
   try {
-    const Comments = await Comment.find();
+    const Comments = await Comment.find()
+      .populate("post");
+      // .exec(function (err, comment) {
+      //   comment.populate(comment, { path: "post.author", model: "User" });
+      // });
 
     return res.status(200).json(Comments);
   } catch (err) {

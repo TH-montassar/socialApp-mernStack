@@ -14,6 +14,7 @@ import Footer from "./shared/Footer";
 import Header from "./shared/Header";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 const App = () => {
   /* This is a React Hook that returns the current location of the user. */
@@ -27,6 +28,8 @@ const App = () => {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
+          <Route exact path="/profile" element={<Profile />}></Route>
+
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
         <Footer />

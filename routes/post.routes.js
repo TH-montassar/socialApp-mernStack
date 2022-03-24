@@ -5,7 +5,7 @@ const {
   getComments,
   deleteComment,
   createCommentReplay,
-} = require("../controllers/commend.controllers");
+} = require("../controllers/comment.controllers");
 const {
   newReaction,
   deleteReaction,
@@ -17,6 +17,7 @@ const {
   getMyPost,
   getPosts,
   deletePost,
+  getPostsWithComment,
 } = require("../controllers/post.controllers");
 
 const Comment = require("../models/comment.models");
@@ -78,17 +79,19 @@ router.param("post", async (req, res, next, id) => {
 });
 
 // posts routes
-router.post("/:post/share", verifyToken,sharePost,activity);
-router.post("/", verifyToken, createPost, activity);
+router.post("/:post/share", verifyToken, sharePost, activity);
+router.post("/", /**verifyToken  ,*/createPost , activity);
 router.put("/:post", verifyToken, isPostOwner, updatePost);
 router.get("/", getPosts);
-router.get("/me", verifyToken, getMyPost);
+router.get("/me", /**verifyToken  ,*/ getMyPost);
 router.delete("/:post", verifyToken, isPostOwner, deletePost);
 //comment routes
 
+router.get("/getPostsWithComment", getPostsWithComment);
 router.post("/:post/comments", verifyToken, createComment, activity);
 router.post("/:post/:comment", verifyToken, createCommentReplay, activity);
-router.get("/:post/comments", verifyToken, getComments);
+//router.get("/:post/comments", verifyToken, getComments);
+router.get("/comments", /**verifyToken  ,*/ getComments);
 router.put(
   "/:post/comments/:comment",
   verifyToken,

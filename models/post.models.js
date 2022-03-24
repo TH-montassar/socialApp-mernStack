@@ -1,3 +1,4 @@
+/* The above code is creating a new schema for the Post model. */
 const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema(
   {

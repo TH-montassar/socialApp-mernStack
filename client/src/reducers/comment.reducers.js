@@ -1,4 +1,4 @@
-import { COMMENT_ERROR, GET_COMMENT } from "../constants/action";
+import { ADD_COMMENT, COMMENT_ERROR, GET_COMMENT } from "../constants/action";
 
 const initialState = {
   comments: [],
@@ -11,6 +11,11 @@ const CommentReducers = (state = initialState, action) => {
   const { payload, type } = action;
   switch (type) {
     case GET_COMMENT:
+      return {
+        ...state,
+        comments: payload,
+      };
+    case ADD_COMMENT:
       return {
         ...state,
         comments: payload,

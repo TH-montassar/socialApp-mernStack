@@ -1,5 +1,7 @@
 /* Importing the constants from the action file. */
 import {
+  ADD_POST,
+  GET_MY_POST,
   GET_POST,
   GET_POST_WITH_COMMENT,
   POST_ERROR,
@@ -14,7 +16,7 @@ const initialState = {
 };
 
 /**
- * The reducer function takes the state and an action as arguments. 
+ * The reducer function takes the state and an action as arguments.
  * It returns the new state
  * @param [state] - The state of the reducer.
  * @param action - The action that is being dispatched.
@@ -31,16 +33,22 @@ const PostReducers = (state = initialState, action) => {
         posts: payload,
       };
 
-
-
+    case ADD_POST:
+      return {
+        ...state,
+        post: payload,
+      };
+    case GET_MY_POST:
+      return {
+        ...state,
+        posts: payload,
+      };
     case GET_POST_WITH_COMMENT:
       return {
         ...state,
         //*payload. 3ibara reponce mmta3 postman
         posts: payload,
       };
-
-
     case POST_ERROR:
       return {
         ...state,
