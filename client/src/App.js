@@ -1,5 +1,7 @@
 /* This is the code that imports the React library and the React-Router library. */
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -15,11 +17,32 @@ import Header from "./shared/Header";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Spinner from "./shared/Spinner";
+import { setAuthToken } from "./utils/setAuthToken";
+import { authcheck, logout } from "./actions/auth.action";
 
 const App = () => {
+
+ 
   /* This is a React Hook that returns the current location of the user. */
   // const location = useLocation();
   // const queries = new URLSearchParams(location.search);
+
+/* This is a React Hook that returns the current location of the user. */
+   useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    store.dispatch(authcheck());
+
+    window.addEventListener("storage", () => {
+      if (!localStorage.token) store.dispatch(logout());
+    });
+  }, []) 
+
+  
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -28,7 +51,8 @@ const App = () => {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
-          <Route exact path="/profile" element={<Profile />}></Route>
+          <Route  path="/profile/*" element={<Profile />}></Route>
+          <Route exact path="/s" element={<Spinner />}></Route>
 
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>

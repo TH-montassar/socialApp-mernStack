@@ -5,7 +5,7 @@ const createPost = async (req, res, next) => {
   try {
     const newPost = new Post({
       content: req.body.content,
-      //author: req.verifiedUser._id,
+      author: req.verifiedUser._id,
 
       image: req.body.image,
     });
@@ -55,7 +55,7 @@ const getMyPost = async (req, res) => {
 
   console.log(currentUser);
   try {
-    const post = await Post.find({ author: currentUser });
+    const post = await Post.find({ author: currentUser }).sort({ createdAt: -1 });;
 
     const PostLength = post.length;
     if (PostLength === 0) {
@@ -68,7 +68,7 @@ const getMyPost = async (req, res) => {
 };
 const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("author");
+    const posts = await Post.find().populate("author").sort({ createdAt: -1 });;
 
     return res.status(200).json(posts);
   } catch (err) {

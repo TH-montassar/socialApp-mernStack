@@ -2,7 +2,10 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { logout } from "../../actions/auth.action";
+import { useDispatch } from "react-redux";
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <header>
       <div className="topbar stick">
@@ -245,7 +248,17 @@ const Header = () => {
                 </Link>
               </div>
             </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => dispatch(logout())}
+              
+              >
+               <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+            </li>
           </ul>
+
           <div className="user-img">
             <img src="images/resources/admin.jpg" alt="" />
             <span className="status f-online"></span>
@@ -276,10 +289,11 @@ const Header = () => {
               </Link>
             </div>
           </div>
-          <span className="ti-menu main-menu" data-ripple=""></span>
+        
         </div>
       </div>
-      {/* <div className="responsive-header">
+
+      <div className="responsive-header">
         <div className="mh-head first Sticky">
           <span className="mh-btns-left">
             <Link className="" to="#menu">
@@ -760,7 +774,7 @@ const Header = () => {
             </div>
           </div>
         </nav>
-      </div> */}
+      </div>
     </header>
   );
 };

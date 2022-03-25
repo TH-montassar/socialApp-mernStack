@@ -1,28 +1,45 @@
-import { AUTH_ERROR, LOGIN, REGISTER } from "../constants/action";
+import { AUTH_CHECK, AUTH_ERROR, AUTH_LOADING, LOGIN, LOGOUT, REGISTER } from "../constants/action";
 
 const initialSate = {
   token: localStorage.getItem("token"),
   user: null,
   error: {},
-  loading: false,
+  isLoading: false,
   isAuthenticated: false,
 };
 
 const AuthReducers = (state = initialSate, action) => {
+
+
   const { type, payload } = action;
   switch (type) {
+    case AUTH_LOADING:
+      return {
+        ...state,
+        user: payload,
+        isLoading: true,
+      };
     case LOGIN:
       return {
         ...state,
         user: payload.user,
         token: payload.token,
         isAuthenticated: true,
+        isLoading: false,
       };
-
+ case AUTH_CHECK:
+      return {
+        ...state,
+        user: payload.user, 
+        isAuthenticated: true,
+        isLoading: false,
+      };
     case REGISTER:
       return {
         ...state,
         user: payload,
+        isLoading: false,
+        isAuthenticated: true,
       };
     case AUTH_ERROR:
       localStorage.removeItem("token");
@@ -31,8 +48,17 @@ const AuthReducers = (state = initialSate, action) => {
         token: null,
         isAuthenticated: false,
         error: payload,
+        isLoading: false,
       };
-
+      case LOGOUT:
+        localStorage.removeItem("token");
+        return {
+          ...state,
+          isAuthenticated: false,
+          user: null,
+          token: null,
+          isLoading: false,
+        };
     default:
       return state;
   }

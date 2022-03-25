@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { login } from "../../actions/auth.action";
 import logo from "../../assets/images/wink.png";
+import Spinner from "../../shared/Spinner";
+
 const Login = () => {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => {
-    return state.authReducers;
-  });
+
   const [Form, setForm] = useState({
     email: "",
     password: "",
@@ -26,8 +26,15 @@ const Login = () => {
       password: "",
     });
   };
-
-  return (
+  const { isLoading, isAuthenticated } = useSelector((state) => {
+    return state.authReducers;
+  });
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className="theme-layout">
       <div className="container-fluid pdng0">
         <div className="row merged">
@@ -75,7 +82,7 @@ const Login = () => {
                       autoComplete="email"
                       required
                     />
-                    <label className="control-label" htmlhtmlFor="email">
+                    <label className="control-label" htmlFor="email">
                       email
                     </label>
                     <i className="mtrl-select"></i>
@@ -90,7 +97,7 @@ const Login = () => {
                       id="password"
                       required
                     />
-                    <label className="control-label" htmlhtmlFor="password">
+                    <label className="control-label" htmlFor="password">
                       Password
                     </label>
                     <i className="mtrl-select"></i>

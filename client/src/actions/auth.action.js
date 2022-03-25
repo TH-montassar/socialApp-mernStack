@@ -1,10 +1,43 @@
 import axios from "axios";
-import { AUTH_ERROR, LOGIN, REGISTER } from "../constants/action";
+import { AUTH_ERROR, AUTH_CHECK,AUTH_LOADING, LOGIN, REGISTER,LOGOUT } from "../constants/action";
+import { setAuthToken } from "../utils/setAuthToken";
+
+
+
+
+
+export const authcheck = () => async (dispatch) => {
+	dispatch({
+		type: AUTH_LOADING,
+	});
+
+	if (localStorage.getItem("token")) {
+		setAuthToken(localStorage.getItem("token"));
+	}
+	try {
+		const res = await axios.get("/api/auth/check");
+		dispatch({
+			type: AUTH_CHECK,
+			payload: res.data,
+		});
+	} catch (err) {
+		dispatch({
+			type: AUTH_ERROR,
+			payload: err,
+		});
+	}
+};
+
 export const login = (data) => async (dispatch) => {
+  dispatch({
+    type: AUTH_LOADING,
+  });
   try {
     const res = await axios.post("/api/auth/login", data, {
       headers: { "Content-Type": "application/json" },
     });
+
+    setAuthToken(res.data.token)
     dispatch({
       type: LOGIN,
       payload: res.data,
@@ -17,6 +50,9 @@ export const login = (data) => async (dispatch) => {
   }
 };
 export const register = (data) => async (dispatch) => {
+  dispatch({
+    type: AUTH_LOADING,
+  });
   try {
     const res = await axios.post("/api/auth/register", data, {
       header: { "Content-Type": "application/json" },
@@ -31,4 +67,13 @@ export const register = (data) => async (dispatch) => {
       payload: err,
     });
   }
+};
+
+export const logout = () => async (dispatch) => {
+	dispatch({
+		type: AUTH_LOADING,
+	});
+	dispatch({
+		type: LOGOUT,
+	});
 };

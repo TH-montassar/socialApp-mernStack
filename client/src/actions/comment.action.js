@@ -1,6 +1,9 @@
 import axios from "axios";
-import { ADD_COMMENT, COMMENT_ERROR, GET_COMMENT } from "../constants/action";
+import { ADD_COMMENT, COMMENT_ERROR, COMMENT_LOADING, GET_COMMENT } from "../constants/action";
 export const getComment = () => async (dispatch) => {
+  dispatch({
+    type:COMMENT_LOADING,
+  });
   try {
     const res = await axios.get(`/api/posts/comments`);
     dispatch({
@@ -15,6 +18,9 @@ export const getComment = () => async (dispatch) => {
   }
 };
 export const createComment = (id, data) => async (dispatch) => {
+  dispatch({
+    type:COMMENT_LOADING,
+  });
   try {
     const res = await axios.poste(`/api/posts/${id}/comments`, data, {
       headers: { "Content-Type": "application/json" },

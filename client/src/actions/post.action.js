@@ -5,8 +5,12 @@ import {
   GET_POST,
   GET_POST_WITH_COMMENT,
   POST_ERROR,
+  POST_LOADING,
 } from "../constants/action";
 export const getPosts = () => async (dispatch) => {
+  dispatch({
+    type: POST_LOADING,
+  });
   try {
     const res = await axios.get("/api/posts");
     dispatch({
@@ -22,6 +26,9 @@ export const getPosts = () => async (dispatch) => {
 };
 
 export const createPost = (data) => async (dispatch) => {
+  dispatch({
+    type: POST_LOADING,
+  });
   try {
     const res = await axios.post("/api/posts", data, {
       headers: { "Content-Type": "application/json" },
@@ -39,6 +46,9 @@ export const createPost = (data) => async (dispatch) => {
 };
 
 export const getPostsWithComment = () => async (dispatch) => {
+  dispatch({
+    type: POST_LOADING,
+  });
   try {
     const res = await axios.get("/api/posts/getPostsWithComment");
     dispatch({
@@ -54,6 +64,9 @@ export const getPostsWithComment = () => async (dispatch) => {
 };
 
 export const getMyPost = () => async (dispatch) => {
+  dispatch({
+    type: POST_LOADING,
+  });
   try {
     const res = await axios.get("/api/posts/me");
     dispatch({

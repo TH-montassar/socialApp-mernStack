@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { register } from "../../actions/auth.action";
 import logo from "../../assets/images/wink.png";
+import Spinner from "../../shared/Spinner";
 const Register = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [Form, setForm] = useState({
     firstName: "",
@@ -35,8 +37,16 @@ const Register = () => {
       number: "",
     });
   };
+  const { isLoading, isAuthenticated } = useSelector((state) => {
+    return state.authReducers;
+  });
 
-  return (
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className="theme-layout">
       <div className="container-fluid pdng0">
         <div className="row merged">
@@ -86,7 +96,7 @@ const Register = () => {
                       id="firstName"
                       required
                     />
-                    <label className="control-label" htmlhtmlFor="input">
+                    <label className="control-label" htmlFor="input">
                       First Name
                     </label>
                     <i className="mtrl-select"></i>
@@ -102,7 +112,7 @@ const Register = () => {
                       id="lastName"
                       required
                     />
-                    <label className="control-label" htmlhtmlFor="input">
+                    <label className="control-label" htmlFor="input">
                       Last Name
                     </label>
                     <i className="mtrl-select"></i>
@@ -118,7 +128,7 @@ const Register = () => {
                       name="number"
                       id="number"
                     />
-                    <label className="control-label" htmlhtmlFor="number">
+                    <label className="control-label" htmlFor="number">
                       number
                     </label>
                     <i className="mtrl-select"></i>
@@ -133,7 +143,7 @@ const Register = () => {
                       name="password"
                       id="password"
                     />
-                    <label className="control-label" htmlhtmlFor="password">
+                    <label className="control-label" htmlFor="password">
                       Password
                     </label>
                     <i className="mtrl-select"></i>
@@ -148,10 +158,7 @@ const Register = () => {
                       id="confirmPassword"
                       required
                     />
-                    <label
-                      className="control-label"
-                      htmlhtmlFor="confirmPassword"
-                    >
+                    <label className="control-label" htmlFor="confirmPassword">
                       confirm Password
                     </label>
                     <i className="mtrl-select"></i>
@@ -182,7 +189,7 @@ const Register = () => {
                       autoComplete="email"
                       required
                     />
-                    <label className="control-label" htmlhtmlFor="input">
+                    <label className="control-label" htmlFor="input">
                       <a
                         href="https://wpkixx.com/cdn-cgi/l/email-protection"
                         className="__cf_email__"

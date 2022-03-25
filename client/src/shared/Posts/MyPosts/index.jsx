@@ -10,18 +10,19 @@ import comet2 from "../../../assets/resources/comet-2.jpg";
 const MyPosts = () => {
   /* Creating a function that will dispatch an action to the store. */
   const dispatch = useDispatch();
-
-
+  const { isAuthenticated } = useSelector((state) => {
+    return state.authReducers;
+  });
   useEffect(() => {
-    dispatch(getMyPost());
-  }, []);
+    if (isAuthenticated) {
+      dispatch(getMyPost());
+    }
+  }, [isAuthenticated]);
   const { isLoading, posts } = useSelector((state) => {
     return state.postReducers;
   });
 
   return (
-
-
     <div className="loadMore">
       {posts.map((post) => (
         <div key={post._id} className="central-meta item">
@@ -149,97 +150,12 @@ const MyPosts = () => {
                 </div>
               </div>
             </div>
-
-            <div className="coment-area">
-              <ul className="we-comet">
-                {post.PostsComments.length > 0 &&
-                  post.PostsComments.map((comment) => {
-                    return (
-                      <li>
-                        {/* comment */}
-
-                        <div className="comet-avatar">
-                          <img src={comet1} alt="" />
-                        </div>
-
-                        <div className="we-comment">
-                          <div className="coment-head">
-                            <h5>
-                              <Link to="time-line.html" title=""></Link>
-                            </h5>
-                            <span>1 year ago</span>
-                            <Link className="we-reply" to="#" title="Reply">
-                              <i className="fa fa-reply"></i>
-                            </Link>
-                          </div>
-                          <p>{comment.content}</p>
-                        </div>
-                        {/* replay comment */}
-                        <ul>
-                          {post.PostsComments.comment !== null &&
-                            post.PostsComments.map((comments) => {
-                              return (
-                                <li>
-                                  <div className="comet-avatar">
-                                    <img src={comet2} alt="" />
-                                  </div>
-                                  <div className="we-comment">
-                                    <div className="coment-head">
-                                      <h5>
-                                        <Link to="time-line.html" title="">
-                                          alexendra dadrio
-                                        </Link>
-                                      </h5>
-                                      <span>1 month ago</span>
-                                      <Link
-                                        className="we-reply"
-                                        to="#"
-                                        title="Reply"
-                                      >
-                                        <i className="fa fa-reply"></i>
-                                      </Link>
-                                    </div>
-                                    <p>{comments.content}</p>
-                                  </div>
-                                </li>
-                              );
-                            })}
-                          {/* create replay comment */}
-                          <li className="post-comment">
-                            <div className="comet-avatar">
-                              <img src={comet1} alt="" />
-                            </div>
-                            <div className="post-comt-box">
-                              <form method="post">
-                                <textarea placeholder="Post your comment"></textarea>
-
-                                <button className="text-cyan-500	 z-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                                  comment
-                                </button>
-                              </form>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                    );
-                  })}
-
-                <li>
-                  <Link to="#" title="" className="showmore underline">
-                    more comments
-                  </Link>
-                </li>
-              
-              </ul>
-            </div>
           </div>
         </div>
       ))}
 
       {/* ----------------------- */}
     </div>
-
-
   );
 };
 
