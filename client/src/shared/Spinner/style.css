@@ -1,0 +1,24 @@
+.spinner {
+  width: 100%;
+  height: 100%;
+  top: 0x;
+  left: 0px;
+  position: fixed;
+  display: block;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  opacity: 1;
+  z-index: 50;
+}
+.spinner > span {
+  opacity: 1;
+  display: block;
+  position: relative;
+  height: 0px;
+  width: 0px;
+}
+.spinner > span > i {
+  --tw-text-opacity: 1;
+  --tw-text-opacity: 1;
+  color: rgb(2 132 199 / var(--tw-text-opacity));
+}

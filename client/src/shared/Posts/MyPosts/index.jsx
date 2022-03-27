@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyPost } from "../../../actions/post.action";
-import { createComment } from "../../../actions/comment.action";
-import { Link } from "react-router-dom";
+
+import { Link, Navigate } from "react-router-dom";
 import friendAvatar10 from "../../../assets/resources/friend-avatar10.jpg";
 
-import comet1 from "../../../assets/resources/comet-1.jpg";
-import comet2 from "../../../assets/resources/comet-2.jpg";
 const MyPosts = () => {
   /* Creating a function that will dispatch an action to the store. */
   const dispatch = useDispatch();
@@ -21,7 +19,9 @@ const MyPosts = () => {
   const { isLoading, posts } = useSelector((state) => {
     return state.postReducers;
   });
-
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
   return (
     <div className="loadMore">
       {posts.map((post) => (

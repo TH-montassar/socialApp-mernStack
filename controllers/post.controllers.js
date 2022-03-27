@@ -1,5 +1,6 @@
 const Comment = require("../models/comment.models");
 const Post = require("../models/post.models");
+const Reaction = require("../models/reaction.models");
 
 const createPost = async (req, res, next) => {
   try {
@@ -55,7 +56,9 @@ const getMyPost = async (req, res) => {
 
   console.log(currentUser);
   try {
-    const post = await Post.find({ author: currentUser }).sort({ createdAt: -1 });;
+    const post = await Post.find({ author: currentUser }).sort({
+      createdAt: -1,
+    });
 
     const PostLength = post.length;
     if (PostLength === 0) {
@@ -68,7 +71,7 @@ const getMyPost = async (req, res) => {
 };
 const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("author").sort({ createdAt: -1 });;
+    const posts = await Post.find().populate("author").sort({ createdAt: -1 });
 
     return res.status(200).json(posts);
   } catch (err) {
@@ -77,8 +80,34 @@ const getPosts = async (req, res) => {
 };
 const getPostsWithComment = async (req, res) => {
   try {
+   
     /* Using the aggregation framework to join the posts collection with the comments collection. */
     const posts = await Post.aggregate([
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "post",
+          as: "PostsComments",
+        },
+      },
+    ]).sort({ createdAt: -1 });
+    await Post.populate(posts, { path: "author" });
+    return res.status(200).json(posts);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+const getMyPostsWithComment = async (req, res) => {
+  const currentUser = req.verifiedUser._id;
+  try {
+    /* Using the aggregation framework to join the posts collection with the comments collection. */
+    const posts = await Post.aggregate([
+      {
+        $match: {
+          author: currentUser,
+        },
+      },
       {
         $lookup: {
           from: "comments",
@@ -107,6 +136,7 @@ const deletePost = async (req, res) => {
   }
 };
 
+module.exports.getMyPostsWithComment = getMyPostsWithComment;
 module.exports.getPostsWithComment = getPostsWithComment;
 module.exports.createPost = createPost;
 module.exports.sharePost = sharePost;

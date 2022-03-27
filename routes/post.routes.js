@@ -9,6 +9,9 @@ const {
 const {
   newReaction,
   deleteReaction,
+  countReaction,
+
+  countReactionDislike,
 } = require("../controllers/reaction.controllers");
 const {
   createPost,
@@ -106,12 +109,14 @@ router.delete(
 );
 
 // Reactions routes
+
+router.get("/:post/reactions/count/like", verifyToken, countReaction);
+router.get("/:post/reactions/count/dislike", verifyToken, countReaction);
 router.post("/:post/reactions/like", verifyToken, newReaction, activity);
 router.post("/:post/reactions/dislike", verifyToken, newReaction, activity);
 
 router.delete(
   "/:post/reactions/:reaction",
-
   verifyToken,
   isReactionOwner,
   deleteReaction

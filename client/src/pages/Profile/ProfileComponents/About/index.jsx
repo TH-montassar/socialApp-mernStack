@@ -1,6 +1,16 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { getMyProfile } from "../../../../actions/profile.action";
+import { useDispatch, useSelector } from "react-redux";
 const About = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyProfile());
+  }, []);
+  const { profile } = useSelector((state) => {
+    return state.profileReducers;
+  });
+
   return (
     <section>
       <div class="gap gray-bg">
@@ -79,11 +89,7 @@ const About = () => {
                           <i class="ti-info-alt"></i> Personal Info
                         </h5>
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat.
+                         
                         </p>
                       </div>
                       <div class="d-flex flex-row mt-2">
@@ -149,7 +155,7 @@ const About = () => {
                                 </a>
                               </li>
                               <li>
-                                <i class="ti-world"></i>www.yoursite.com
+                              <i class="fa-solid fa-cake-candles"></i>{profile.birthday}
                               </li>
                             </ul>
                           </div>

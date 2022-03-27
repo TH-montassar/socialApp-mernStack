@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../../actions/comment.action";
 
-import { getPosts, getPostsWithComment } from "../../../actions/post.action";
-import friendAvatar3 from "../../../assets/resources/friend-avatar3.jpg";
-import friendAvatar5 from "../../../assets/resources/friend-avatar5.jpg";
+import {  getPostsWithComment } from "../../../actions/post.action";
 
-import friendAvatar9 from "../../../assets/resources/friend-avatar9.jpg";
 import friendAvatar10 from "../../../assets/resources/friend-avatar10.jpg";
 import { Link } from "react-router-dom";
 import Spinner from "../../../shared/Spinner";
