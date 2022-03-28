@@ -99,10 +99,9 @@ router.put(
 router.get("/relationships", verifyToken,getOwnedRelationship);
 
 //profile router
-//! 3lech lezmha  /:user/:profile  kol user ya3mel update ken ll profile mte3o
-router.put("/:user/:profile", verifyToken, isProfileOwner, updateProfile);
 
-router.put("/profile", verifyToken, updateProfillee);
+
+router.put("/profile", verifyToken, updateProfile);
 router.get("/:user/profile", verifyToken, getProfile);
 router.get("/Profile/me", verifyToken, getMyProfile);
 

@@ -40,8 +40,10 @@ const sharePost = async (req, res, next) => {
 };
 
 const updatePost = async (req, res) => {
+  const post = req.post;
+  
   try {
-    const post = req.post;
+    
 
     const updatePost = await Post.findByIdAndUpdate(post._id, req.body, {
       new: true,

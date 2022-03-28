@@ -24,7 +24,7 @@ const Header = () => {
             </li>
             <li>
               <Link to="/profile" title="">
-                timeline
+               Profile
               </Link>
             </li>
             <li>

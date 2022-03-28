@@ -1,6 +1,6 @@
 const Reaction = require("../models/reaction.models");
 
-const newReaction = async (req, res) => {
+const newReaction = async (req, res, next) => {
   try {
     const newReaction = new Reaction({
       author: req.verifiedUser._id,
@@ -15,7 +15,8 @@ const newReaction = async (req, res) => {
       model: "Reaction",
       action: req.path.split("/")[3] === "like" ? "like" : "dislike",
     };
-    return res.status(201).json(savedReaction);
+    res.status(201).json(savedReaction);
+    return next();
   } catch (err) {
     return res.status(500).json(err);
   }

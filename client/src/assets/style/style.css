@@ -22,6 +22,33 @@ body {
   overflow-x: hidden;
   color: #545454;
 }
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #2c3e50;
+}
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #95a5a6;
+  font-family: "Helvetica", arial, sans-serif;
+  font-size: 18px;
+  border: 1px solid #ecf0f1;
+  background: #ecf0f1;
+  padding: 5px;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+input[type="date"],
+focus {
+  color: #95a5a6;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
 .bio {
   display: flex;
   flex-direction: column;
@@ -399,8 +426,6 @@ iframe {
   height: 370px;
 }
 
-
-
 #topcontrol {
   border-radius: 5px;
   color: #fff;
@@ -718,14 +743,11 @@ header.sticky {
 
 .feature-photo > figure {
   margin-bottom: 0;
-  
-
 }
 
 .feature-photo > figure img {
   display: inline-block;
   width: 100%;
-
 }
 
 .user-avatar {
@@ -1226,10 +1248,13 @@ header.sticky {
   background: #fdfdfd none repeat scroll 0 0;
   border: 1px solid #ede9e9;
   border-radius: 3px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-bottom: 20px;
   padding: 25px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .new-postbox {

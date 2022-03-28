@@ -8,8 +8,10 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TimeLine from "./ProfileComponents/TimeLine";
 import About from "./ProfileComponents/About";
-import { getMyProfile } from "../../actions/profile.action";
 
+import { getMyProfile } from "../../actions/profile.action";
+import UpdateProfile from "./ProfileComponents/UpdateProfile";
+import Relationship from "./ProfileComponents/Relationships";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -91,18 +93,11 @@ const Profile = () => {
                       >
                         Videos
                       </Link>
-                      <Link
-                        className=""
-                        to="timeline-friends.html"
-                        title=""
-                        data-ripple=""
-                      >
-                        Friends
-                      </Link>
+                      <Link to="/profile/relationship">Friends</Link>
 
                       <Link to="/profile/about">about</Link>
-                      <Link className="" to="#" title="" data-ripple="">
-                        more
+                      <Link className="" to="/profile/edit">
+                        Edit Basic Information
                       </Link>
                     </li>
                   </ul>
@@ -120,7 +115,13 @@ const Profile = () => {
 
       <Routes>
         <Route exact path="/" element={<TimeLine />}></Route>
-        <Route exact path="/about" element={<About />}></Route>
+        <Route exact path="/edit" element={<UpdateProfile />}></Route>
+        <Route path="/relationship/*" element={<Relationship />}></Route>
+        <Route
+          exact
+          path="/about"
+          element={<About profile={profile} />}
+        ></Route>
       </Routes>
     </div>
   );

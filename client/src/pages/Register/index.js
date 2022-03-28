@@ -85,7 +85,7 @@ const Register = () => {
                 </p>
                 {/* --- */}
 
-                <form onSubmit={(e) => onSubmitForm(e)}>
+                <form  onSubmit={(e) => onSubmitForm(e)}>
                   <div className="form-group">
                     <input
                       autoComplete="text"

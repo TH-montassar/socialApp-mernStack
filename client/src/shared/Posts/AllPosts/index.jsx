@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../../actions/comment.action";
 
-import {  getPostsWithComment } from "../../../actions/post.action";
+import { getPostsWithComment } from "../../../actions/post.action";
 
 import friendAvatar10 from "../../../assets/resources/friend-avatar10.jpg";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import Spinner from "../../../shared/Spinner";
 
 import comet1 from "../../../assets/resources/comet-1.jpg";
 import comet2 from "../../../assets/resources/comet-2.jpg";
+import { getReactions } from "../../../actions/reaction.action";
 
 const Posts = () => {
   /* Creating a function that will dispatch an action to the store. */
@@ -51,6 +52,17 @@ const Posts = () => {
   const { isLoading, posts } = useSelector((state) => {
     return state.postReducers;
   });
+
+
+
+  
+  useEffect(() => {
+    dispatch(getReactions());
+  }, []);
+  const { reactions } = useSelector((state) => {
+    return state.reactionReducers;
+  });
+
   return isLoading ? (
     <Spinner />
   ) : (
@@ -79,16 +91,6 @@ const Posts = () => {
                   <img src={post.image} alt="" />
                   <div className="we-video-info">
                     <ul>
-                      <li>
-                        <span
-                          className="views"
-                          data-toggle="tooltip"
-                          title="views"
-                        >
-                          <i className="fa fa-eye"></i>
-                          <ins>1.2k</ins>
-                        </span>
-                      </li>
                       <li>
                         <span
                           className="comment"
@@ -121,64 +123,8 @@ const Posts = () => {
                       </li>
                       <li className="social-media">
                         <div className="menu">
-                          <div className="btn trigger">
+                          <div className=" menu btn trigger">
                             <i className="fa fa-share-alt"></i>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-html5"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-facebook"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-google-plus"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-twitter"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-css3"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-instagram"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-dribbble"></i>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="rotater">
-                            <div className="btn btn-icon">
-                              <Link to="#" title="">
-                                <i className="fa fa-pinterest"></i>
-                              </Link>
-                            </div>
                           </div>
                         </div>
                       </li>
@@ -189,8 +135,8 @@ const Posts = () => {
 
               <div className="coment-area">
                 <ul className="we-comet">
-                  {post.PostsComments.length > 0 &&
-                    post.PostsComments.map((comment) => {
+                  {post.PostsComments?.length > 0 &&
+                    post.PostsComments?.map((comment) => {
                       return (
                         <li>
                           {/* comment */}
@@ -213,7 +159,7 @@ const Posts = () => {
                           </div>
                           {/* replay comment */}
                           <ul>
-                            {post.PostsComments.comment !== null &&
+                            {post.PostsComments.comment > 0 &&
                               post.PostsComments.map((comments) => {
                                 return (
                                   <li>
@@ -250,7 +196,10 @@ const Posts = () => {
                                 <form method="post">
                                   <textarea placeholder="Post your comment"></textarea>
 
-                                  <button className="text-cyan-500	 z-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                  <button
+                                    className="text-cyan-500	 z-50 bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 border border-blue-700 rounded"
+                                    type="submit"
+                                  >
                                     comment
                                   </button>
                                 </form>
