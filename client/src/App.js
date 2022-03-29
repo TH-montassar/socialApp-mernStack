@@ -22,14 +22,12 @@ import { setAuthToken } from "./utils/setAuthToken";
 import { authcheck, logout } from "./actions/auth.action";
 
 const App = () => {
-
- 
   /* This is a React Hook that returns the current location of the user. */
   // const location = useLocation();
   // const queries = new URLSearchParams(location.search);
 
-/* This is a React Hook that returns the current location of the user. */
-   useEffect(() => {
+  /* This is a React Hook that returns the current location of the user. */
+  useEffect(() => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -39,20 +37,18 @@ const App = () => {
     window.addEventListener("storage", () => {
       if (!localStorage.token) store.dispatch(logout());
     });
-  }, []) 
-
-  
+  }, []);
 
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/register" element={<Register />}></Route>
-          <Route  path="/profile/*" element={<Profile />}></Route>
-          <Route exact path="/s" element={<Spinner />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/profile/*" element={<Profile />}></Route>
+          <Route path="/s" element={<Spinner />}></Route>
 
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>

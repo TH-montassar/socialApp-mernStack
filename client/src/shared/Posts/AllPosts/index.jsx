@@ -18,32 +18,26 @@ const Posts = () => {
 
   /* Creating a state variable called Form and setting it to an empty array. */
   const [Form, setForm] = useState([
-    {
-      content: "",
-      _id: "",
-    },
+    
   ]);
   /**
    * It sets the value of the input to the value of the target.
    * @param e - The event object that contains the data of the event that triggered the function.
    * @param postId - The id of the post that the comment is being added to.
    */
-  const onInputCommentChange = (e, postId) => {
-    setForm({ ...Form, [e.target.name]: e.target.value, postId });
+  const onInputCommentChange = (e, postIndex) => {
+    const { value } = e.target;
+    let newForm = [...Form];
+    newForm[postIndex].content = value;
+    setForm(newForm);
   };
   /**
    * The function creates a comment and then clears the form
    * @param e - The event object that contains the data of the event that triggered the function.
    */
-  const onSubmitFormComment = (e) => {
+  const onSubmitFormComment = (e, postIndex) => {
     e.preventDefault();
-    dispatch(createComment(Form));
-
-    //ba3ed maykamel yraja formul fer8a
-    setForm({
-      ...Form,
-      content: "",
-    });
+    dispatch(createComment(Form[postIndex]));
   };
 
   useEffect(() => {
@@ -53,9 +47,6 @@ const Posts = () => {
     return state.postReducers;
   });
 
-
-
-  
   useEffect(() => {
     dispatch(getReactions());
   }, []);
@@ -68,9 +59,9 @@ const Posts = () => {
   ) : (
     <div>
       <div className="loadMore">
-        {posts.map((post) => (
+        {posts.map((post, postIndex) => (
           <div key={post._id} className="central-meta item">
-            <div className="user-post">
+            <div  className="user-post">
               <div className="friend-info">
                 <figure>
                   <img src={friendAvatar10} alt="" />
@@ -78,7 +69,6 @@ const Posts = () => {
                 <div className="friend-name">
                   <Link to="time-line.html">
                     <span>
-                      {" "}
                       {post.author?.firstName} {post.author?.lastName}
                     </span>
                   </Link>
@@ -108,7 +98,7 @@ const Posts = () => {
                           title="like"
                         >
                           <i className="ti-heart"></i>
-                          <ins>2.2k</ins>
+                          <ins>{post?.likes}</ins>
                         </span>
                       </li>
                       <li>
@@ -118,7 +108,7 @@ const Posts = () => {
                           title="dislike"
                         >
                           <i className="ti-heart-broken"></i>
-                          <ins>200</ins>
+                          <ins>{post?.dislikes}</ins>
                         </span>
                       </li>
                       <li className="social-media">
@@ -135,10 +125,10 @@ const Posts = () => {
 
               <div className="coment-area">
                 <ul className="we-comet">
-                  {post.PostsComments?.length > 0 &&
-                    post.PostsComments?.map((comment) => {
+                  {post.comments?.length > 0 &&
+                    post.comments?.map((comment) => {
                       return (
-                        <li>
+                        <li key={comment._id}> 
                           {/* comment */}
 
                           <div className="comet-avatar">
@@ -159,10 +149,10 @@ const Posts = () => {
                           </div>
                           {/* replay comment */}
                           <ul>
-                            {post.PostsComments.comment > 0 &&
-                              post.PostsComments.map((comments) => {
+                            {comment.replies.length > 0 &&
+                              comment.replies.map((reply) => {
                                 return (
-                                  <li>
+                                  <li key={reply._id}>
                                     <div className="comet-avatar">
                                       <img src={comet2} alt="" />
                                     </div>
@@ -182,7 +172,7 @@ const Posts = () => {
                                           <i className="fa fa-reply"></i>
                                         </Link>
                                       </div>
-                                      <p>{comments.content}</p>
+                                      <p>{reply.content}</p>
                                     </div>
                                   </li>
                                 );
@@ -222,12 +212,12 @@ const Posts = () => {
                     </div>
                     <div className="post-comt-box">
                       <form
-                        onSubmit={(e) => onSubmitFormComment(e)}
+                        onSubmit={(e) => onSubmitFormComment(e, postIndex)}
                         className="relative"
                       >
                         <textarea
-                          onChange={(e) => onInputCommentChange(e, post._id)}
-                          value={Form.content}
+                          onChange={(e) => onInputCommentChange(e, postIndex)}
+                          value={Form[postIndex]?.content ? Form[postIndex].content : ""}
                           name="content"
                           placeholder="Post your comment"
                         />

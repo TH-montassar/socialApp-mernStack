@@ -24,6 +24,7 @@ const {
   isProfileOwner,
   isRelationshipOwner,
   activity,
+  isReceiver,
 } = require("../middleware");
 const { getMessages } = require("../controllers/message.controllers");
 //
@@ -76,7 +77,7 @@ router.post("/:user/relationships/addFriend", verifyToken, sendFriendRequest,act
 router.put(
   "/relationships/:relationship/accept",
   verifyToken,
-  isRelationshipOwner,
+  isRelationshipOwner, isReceiver,
   acceptFriendRequest,activity
 );
 //!delete  my relation

@@ -111,17 +111,14 @@ const Profile = () => {
 
           <p>{profile?.bio}</p>
         </div>
+        
       </section>
 
       <Routes>
-        <Route exact path="/" element={<TimeLine />}></Route>
-        <Route exact path="/edit" element={<UpdateProfile />}></Route>
+        <Route path="/" element={<TimeLine />}></Route>
+        <Route path="/edit" element={<UpdateProfile />}></Route>
         <Route path="/relationship/*" element={<Relationship />}></Route>
-        <Route
-          exact
-          path="/about"
-          element={<About profile={profile} />}
-        ></Route>
+        <Route path="/about" element={<About profile={profile} />}></Route>
       </Routes>
     </div>
   );

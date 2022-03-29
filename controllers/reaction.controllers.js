@@ -31,23 +31,23 @@ const deleteReaction = async (req, res) => {
     return res.status(500).json(err);
   }
 };
-const countReaction = async (req, res) => {
-  let reaction = req.path.split("/")[4] === "like" ? "like" : "dislike";
-  console.log(reaction);
-  const posteId = req.post._id;
-  try {
-    const reactions = await Reaction.countDocuments({
-      reaction: reaction,
-      post: posteId,
-    });
-    console.log(reactions);
+// const countReaction = async (req, res) => {
+//   let reaction = req.path.split("/")[4] === "like" ? "like" : "dislike";
+//   console.log(reaction);
+//   const posteId = req.post._id;
+//   try {
+//     const reactions = await Reaction.countDocuments({
+//       reaction: reaction,
+//       post: posteId,
+//     });
+//     console.log(reactions);
 
-    return res.status(200).json(reactions);
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-};
+//     return res.status(200).json(reactions);
+//   } catch (err) {
+//     return res.status(500).json(err);
+//   }
+// };
 
-module.exports.countReaction = countReaction;
+//module.exports.countReaction = countReaction;
 module.exports.newReaction = newReaction;
 module.exports.deleteReaction = deleteReaction;

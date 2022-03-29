@@ -10,20 +10,23 @@ const Relationship = () => {
           <div className="frnds">
             <ul className="nav nav-tabs">
               <li className="nav-item">
-                <Link to="#" className="active">
+                <Link to="/profile/relationship/" className="active">
                   My Friends
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="#">Friend Requests</Link>
+                <Link to="/profile/relationship/request">Friend Requests</Link>
               </li>
             </ul>
 
             <div className="tab-content">
               <Routes>
-                <Route exact path="/" element={<Friends />}></Route>
-                <Route exact path="/request" element={<FriendRequest />}></Route>
+                <Route path="/" element={<Friends />}></Route>
+                <Route path="/request" element={<FriendRequest />}></Route>
               </Routes>
+              <div className="lodmore">
+                <button className="btn-view btn-load-more"></button>
+              </div>
             </div>
           </div>
         </div>

@@ -110,8 +110,8 @@ router.delete(
 
 // Reactions routes
 
-router.get("/:post/reactions/count/like", verifyToken, countReaction);
-router.get("/:post/reactions/count/dislike", verifyToken, countReaction);
+// router.get("/:post/reactions/count/like", verifyToken, countReaction);
+// router.get("/:post/reactions/count/dislike", verifyToken, countReaction);
 router.post("/:post/reactions/like", verifyToken, newReaction, activity);
 router.post("/:post/reactions/dislike", verifyToken, newReaction, activity);
 

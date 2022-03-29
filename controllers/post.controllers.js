@@ -41,10 +41,8 @@ const sharePost = async (req, res, next) => {
 
 const updatePost = async (req, res) => {
   const post = req.post;
-  
-  try {
-    
 
+  try {
     const updatePost = await Post.findByIdAndUpdate(post._id, req.body, {
       new: true,
     });
@@ -82,7 +80,6 @@ const getPosts = async (req, res) => {
 };
 const getPostsWithComment = async (req, res) => {
   try {
-   
     /* Using the aggregation framework to join the posts collection with the comments collection. */
     const posts = await Post.aggregate([
       {
@@ -90,11 +87,45 @@ const getPostsWithComment = async (req, res) => {
           from: "comments",
           localField: "_id",
           foreignField: "post",
-          as: "PostsComments",
+          as: "comments",
+          pipeline: [
+            { $match: { comment: null } },
+            {
+              $lookup: {
+                from: "comments",
+                localField: "_id",
+                foreignField: "comment",
+                as: "replies",
+              },
+            },
+          ],
         },
       },
+
+      {
+        $lookup: {
+          from: "reactions",
+          localField: "_id",
+          foreignField: "post",
+          as: "likes",
+          pipeline: [{ $match: { reaction: "like" } }],
+        },
+      },
+
+      {
+        $lookup: {
+          from: "reactions",
+          localField: "_id",
+          foreignField: "post",
+          as: "dislikes",
+          pipeline: [{ $match: { reaction: "dislike" } }],
+        },
+      },
+      { $addFields: { likes: { $size: "$likes" } } },
+      { $addFields: { dislikes: { $size: "$dislikes" } } },
     ]).sort({ createdAt: -1 });
     await Post.populate(posts, { path: "author" });
+
     return res.status(200).json(posts);
   } catch (err) {
     return res.status(500).json(err);
@@ -115,7 +146,7 @@ const getMyPostsWithComment = async (req, res) => {
           from: "comments",
           localField: "_id",
           foreignField: "post",
-          as: "PostsComments",
+          as: "comments",
         },
       },
     ]).sort({ createdAt: -1 });

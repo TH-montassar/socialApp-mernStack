@@ -5,6 +5,7 @@ const { isProfileOwner } = require("./isProfileOwner");
 const { isReactionOwner } = require("./isReactionOwner");
 const { isReactsPost } = require("./isReactsPost");
 const { isRelationshipOwner } = require("./isRelationshipOwner");
+const { isReceiver } = require("./isReceiver");
 const verifyToken = require("./verifyToken");
 
 module.exports.activity = activity;
@@ -15,3 +16,4 @@ module.exports.isReactionOwner = isReactionOwner;
 module.exports.isReactsPost = isReactsPost;
 module.exports.verifyToken = verifyToken;
 module.exports.isRelationshipOwner = isRelationshipOwner;
+module.exports.isReceiver = isReceiver;

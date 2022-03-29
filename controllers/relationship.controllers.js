@@ -26,26 +26,27 @@ const sendFriendRequest = async (req, res) => {
   }
 };
 
-const acceptFriendRequest = async (req, res) => {
+const acceptFriendRequest = async (req, res, next) => {
   //const currentUser = req.verifiedUser._id;
   //const relationship = await Relationship.findOne({ receiver: currentUser });
 
   // if (!relationship) {
   //   return res.status(401).json(" no friend req for you");
   // }
-
+  console.log(req.relationship._id);
   try {
-    await Relationship.findByIdAndUpdate(
+    const acceptRequest = await Relationship.findByIdAndUpdate(
       req.relationship._id,
       { status: "friends" },
       { new: true }
     );
     res.activity = {
-      id: savedPost._id,
+      id: acceptRequest._id,
       model: "relationship",
       action: " acceptFriendRequest",
     };
-    return res.status(201).json("friend request accepted");
+    res.status(201).json("friend request accepted");
+    return next();
   } catch (err) {
     return res.status(500).json(err);
   }

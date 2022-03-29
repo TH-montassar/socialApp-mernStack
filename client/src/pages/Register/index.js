@@ -26,6 +26,7 @@ const Register = () => {
   const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(register(Form));
+
     //ba3ed maykamel yraja formul fer8a
     setForm({
       ...Form,
@@ -36,6 +37,7 @@ const Register = () => {
       confirmPassword: "",
       number: "",
     });
+    navigate("/login");
   };
   const { isLoading, isAuthenticated } = useSelector((state) => {
     return state.authReducers;
@@ -85,7 +87,7 @@ const Register = () => {
                 </p>
                 {/* --- */}
 
-                <form  onSubmit={(e) => onSubmitForm(e)}>
+                <form onSubmit={(e) => onSubmitForm(e)}>
                   <div className="form-group">
                     <input
                       autoComplete="text"
