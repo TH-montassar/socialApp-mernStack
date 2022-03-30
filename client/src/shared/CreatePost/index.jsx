@@ -6,22 +6,22 @@ const CreatePost = () => {
   /* Creating a function that will dispatch an action to the store. */
   const dispatch = useDispatch();
 
-  const [Form, setForm] = useState({
-    content: "",
-  });
-  const onInputChange = (e) => {
-    setForm({ ...Form, [e.target.name]: e.target.value });
-    console.log(Form);
-  };
+  const [file, setFile] = useState();
+  const [text, setText] = useState();
+
   const onSubmitForm = (e) => {
     e.preventDefault();
-    dispatch(createPost(Form));
+    const post = new FormData();
+    post.append("content", text);
+    post.append("image", file);
+
+    dispatch(createPost(post));
 
     //ba3ed maykamel yraja formul fer8a
-    setForm({
-      ...Form,
-      content: "",
-    });
+    // setForm({
+    //   ...Form,
+    //   content: "",
+    // });
   };
 
   return (
@@ -35,8 +35,8 @@ const CreatePost = () => {
           <div className="newpst-input">
             <form onSubmit={(e) => onSubmitForm(e)}>
               <textarea
-                onChange={(e) => onInputChange(e)}
-                value={Form.content}
+                onChange={(e) => setText(e.target.value)}
+                //value={text.content}
                 rows="2"
                 name="content"
                 placeholder="write something"
@@ -44,29 +44,17 @@ const CreatePost = () => {
               <div className="attachments">
                 <ul>
                   <li>
-                    <i className="fa fa-music"></i>
-                    <label className="fileContainer">
-                      <input type="file" />
-                    </label>
-                  </li>
-                  <li>
                     <i className="fa fa-image"></i>
                     <label className="fileContainer">
-                      <input type="file" />
+                      <input
+                        type="file"
+                        // value={file.image}
+                        FileName="image"
+                        onChange={(e) => setFile(e.target.files[0])}
+                      />
                     </label>
                   </li>
-                  <li>
-                    <i className="fa fa-video-camera"></i>
-                    <label className="fileContainer">
-                      <input type="file" />
-                    </label>
-                  </li>
-                  <li>
-                    <i className="fa fa-camera"></i>
-                    <label className="fileContainer">
-                      <input type="file" />
-                    </label>
-                  </li>
+
                   <li>
                     <button
                       className="border focus:border-black focus:text-black "

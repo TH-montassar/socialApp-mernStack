@@ -100,13 +100,26 @@ const getOwnedRelationship = async (req, res) => {
       })
         .populate("sender")
         .populate("receiver");
+
       return res.status(200).json(users);
     }
+    if (status === "requested") {
+      //!------
+
+      const users = await Relationship.find({
+        status: status,
+        receiver: currentUserId,
+      }).populate("sender");
+
+      return res.status(200).json(users);
+    }
+
     const users = await Relationship.find({
       status,
       $or: [{ sender: currentUserId }, { receiver: currentUserId }],
-    });
-
+    })
+      .populate("sender")
+      .populate("receiver");
     return res.status(200).json(users);
   } catch (err) {
     return res.status(500).json(err);

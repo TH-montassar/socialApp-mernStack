@@ -27,8 +27,8 @@ const Friends = () => {
   return isLoading ? (
     <Spinner />
   ) : (
-    relationships.map((r) => (
-      <div key={r._id} className="tab-pane active fade show " id="frends">
+    relationships.map((relationship) => (
+      <div key={relationship._id} className="tab-pane active fade show " id="frends">
         <ul className="nearby-contct">
           <li>
             <div className="nearly-pepls">
@@ -40,7 +40,7 @@ const Friends = () => {
               <div className="pepl-info">
                 <h4>
                   <a href="time-line.html" title="">
-                    {r.receiver?.firstName} {r.receiver?.lastName}
+                    {relationship.receiver?.firstName} {relationship.receiver?.lastName}
                   </a>
                 </h4>
 
@@ -52,8 +52,9 @@ const Friends = () => {
                 >
                   unfriend
                 </a>
+
                 <a href="#" title="" className="add-butn" data-ripple="">
-                  {}
+                  block Friend
                 </a>
               </div>
             </div>

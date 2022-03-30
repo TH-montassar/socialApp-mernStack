@@ -35,7 +35,7 @@ const AuthReducers = (state = initialSate, action) => {
     case AUTH_CHECK:
       return {
         ...state,
-        user: payload.user,
+        user: payload,
         isAuthenticated: true,
         isLoading: false,
       };

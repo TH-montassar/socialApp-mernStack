@@ -1,14 +1,14 @@
 .spinner {
   width: 100%;
   height: 100%;
-  top: 0x;
+  top: 0px;
   left: 0px;
   position: fixed;
   display: block;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   opacity: 1;
-  z-index: 50;
+  z-index: 999;
 }
 .spinner > span {
   opacity: 1;

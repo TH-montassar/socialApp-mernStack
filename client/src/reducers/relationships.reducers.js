@@ -1,4 +1,5 @@
 import {
+  ACCEPT_FRIENDS,
   GET_RELATIONSHIP,
   RELATIONSHIP_ERROR,
   RELATIONSHIP_LOADING,
@@ -24,6 +25,12 @@ const RelationshipsReducers = (state = initialState, action) => {
       return {
         ...state,
         relationships: payload,
+        isLoading: false,
+      };
+    case ACCEPT_FRIENDS:
+      return {
+        ...state,
+        relationship: payload,
         isLoading: false,
       };
 

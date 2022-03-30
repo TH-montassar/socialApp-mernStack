@@ -72,13 +72,19 @@ router.param("relationship", async (req, res, next, id) => {
   }
 });
 //relationship router
-router.post("/:user/relationships/addFriend", verifyToken, sendFriendRequest,activity);
+router.post(
+  "/:user/relationships/addFriend",
+  verifyToken,
+  sendFriendRequest,
+  activity
+);
 //!update my relation
 router.put(
   "/relationships/:relationship/accept",
   verifyToken,
-  isRelationshipOwner, isReceiver,
-  acceptFriendRequest,activity
+  isReceiver,
+  acceptFriendRequest,
+  activity
 );
 //!delete  my relation
 router.delete(
@@ -96,11 +102,15 @@ router.put(
   isRelationshipOwner,
   blockFriend
 );
+router.post(
+  "/:user/relationships/block",
+  verifyToken,
+  blockFriend
+);
 
-router.get("/relationships", verifyToken,getOwnedRelationship);
+router.get("/relationships", verifyToken, getOwnedRelationship);
 
 //profile router
-
 
 router.put("/profile", verifyToken, updateProfile);
 router.get("/:user/profile", verifyToken, getProfile);

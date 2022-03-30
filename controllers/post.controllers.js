@@ -1,6 +1,4 @@
-const Comment = require("../models/comment.models");
 const Post = require("../models/post.models");
-const Reaction = require("../models/reaction.models");
 
 const createPost = async (req, res, next) => {
   try {
@@ -8,7 +6,7 @@ const createPost = async (req, res, next) => {
       content: req.body.content,
       author: req.verifiedUser._id,
 
-      image: req.body.image,
+      image: `http://localhost:4000/images/${req.file.filename}`,
     });
     const savedPost = await newPost.save();
     res.activity = { id: savedPost._id, model: "Post", action: "create" };

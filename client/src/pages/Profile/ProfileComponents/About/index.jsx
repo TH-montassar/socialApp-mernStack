@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { getMyProfile } from "../../../../actions/profile.action";
 import { useDispatch, useSelector } from "react-redux";
-const About = (props) => {
+const About = () => {
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -9,8 +9,9 @@ const About = (props) => {
   // }, []);
   // const { profile } = useSelector((state) => {
   //   return state.profileReducers;
-  // });
-  const { profile } = props;
+  const { profile } = useSelector((state) => {
+    return state.profileReducers;
+  });
   return (
     <section>
       <div class="gap gray-bg">

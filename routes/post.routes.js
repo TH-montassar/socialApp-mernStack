@@ -81,9 +81,31 @@ router.param("post", async (req, res, next, id) => {
   }
 });
 
+
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: "./uploads",
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  // limits: {
+  //   fileSize: 500000,
+  // },
+});
+
+
 // posts routes
 router.post("/:post/share", verifyToken, sharePost, activity);
-router.post("/", verifyToken, createPost, activity);
+router.post("/", verifyToken, upload.single("image"), createPost, activity);
 router.put("/:post", verifyToken, isPostOwner, updatePost);
 router.get("/", getPosts);
 router.get("/me", verifyToken, getMyPost);

@@ -17,9 +17,9 @@ const Posts = () => {
   const dispatch = useDispatch();
 
   /* Creating a state variable called Form and setting it to an empty array. */
-  const [Form, setForm] = useState([
-    
-  ]);
+  const [Form, setForm] = useState([]);
+
+ 
   /**
    * It sets the value of the input to the value of the target.
    * @param e - The event object that contains the data of the event that triggered the function.
@@ -47,12 +47,12 @@ const Posts = () => {
     return state.postReducers;
   });
 
-  useEffect(() => {
-    dispatch(getReactions());
-  }, []);
-  const { reactions } = useSelector((state) => {
-    return state.reactionReducers;
-  });
+  // useEffect(() => {
+  //   dispatch(getReactions());
+  // }, []);
+  // const { reactions } = useSelector((state) => {
+  //   return state.reactionReducers;
+  // });
 
   return isLoading ? (
     <Spinner />
@@ -61,7 +61,7 @@ const Posts = () => {
       <div className="loadMore">
         {posts.map((post, postIndex) => (
           <div key={post._id} className="central-meta item">
-            <div  className="user-post">
+            <div className="user-post">
               <div className="friend-info">
                 <figure>
                   <img src={friendAvatar10} alt="" />
@@ -128,7 +128,7 @@ const Posts = () => {
                   {post.comments?.length > 0 &&
                     post.comments?.map((comment) => {
                       return (
-                        <li key={comment._id}> 
+                        <li key={comment._id}>
                           {/* comment */}
 
                           <div className="comet-avatar">
@@ -217,7 +217,11 @@ const Posts = () => {
                       >
                         <textarea
                           onChange={(e) => onInputCommentChange(e, postIndex)}
-                          value={Form[postIndex]?.content ? Form[postIndex].content : ""}
+                          value={
+                            Form[postIndex]?.content
+                              ? Form[postIndex].content
+                              : ""
+                          }
                           name="content"
                           placeholder="Post your comment"
                         />

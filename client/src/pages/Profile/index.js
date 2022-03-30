@@ -42,9 +42,6 @@ const Profile = () => {
           </figure>
           <div className="add-btn">
             <span>1205 followers</span>
-            <Link to="#" title="" data-ripple="">
-              Add Friend
-            </Link>
           </div>
           <form className="edit-phto">
             <i className="fa fa-camera-retro"></i>
@@ -73,7 +70,9 @@ const Profile = () => {
                 <div className="timeline-info">
                   <ul>
                     <li className="admin-name">
-                      <h5>montassar themri</h5>
+                      <h5>
+                        {user?.firstName} {user?.lastName}
+                      </h5>
                     </li>
                     <li>
                       <Link to="/profile/">time line</Link>
@@ -111,14 +110,13 @@ const Profile = () => {
 
           <p>{profile?.bio}</p>
         </div>
-        
       </section>
 
       <Routes>
         <Route path="/" element={<TimeLine />}></Route>
         <Route path="/edit" element={<UpdateProfile />}></Route>
         <Route path="/relationship/*" element={<Relationship />}></Route>
-        <Route path="/about" element={<About profile={profile} />}></Route>
+        <Route path="/about" element={<About />}></Route>
       </Routes>
     </div>
   );

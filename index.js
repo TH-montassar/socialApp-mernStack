@@ -39,6 +39,7 @@ app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 //app.use("/api/messages", messageRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/images", express.static("./uploads"));
 
 const port = process.env.PORT || 8000;
 

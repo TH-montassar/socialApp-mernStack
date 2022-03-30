@@ -15,7 +15,7 @@ const Relationship = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/profile/relationship/request">Friend Requests</Link>
+                <Link to="/profile/relationship/request/">Friend Requests</Link>
               </li>
             </ul>
 
