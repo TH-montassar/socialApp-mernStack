@@ -12,6 +12,7 @@ const {
   acceptFriendRequest,
   blockFriend,
   getOwnedRelationship,
+  getUser,
 } = require("../controllers/relationship.controllers");
 const { getMyActivities } = require("../controllers/activity.controllers");
 //
@@ -72,6 +73,9 @@ router.param("relationship", async (req, res, next, id) => {
   }
 });
 //relationship router
+
+router.get("/AllUser", getUser);
+
 router.post(
   "/:user/relationships/addFriend",
   verifyToken,
@@ -102,11 +106,7 @@ router.put(
   isRelationshipOwner,
   blockFriend
 );
-router.post(
-  "/:user/relationships/block",
-  verifyToken,
-  blockFriend
-);
+router.post("/:user/relationships/block", verifyToken, blockFriend);
 
 router.get("/relationships", verifyToken, getOwnedRelationship);
 

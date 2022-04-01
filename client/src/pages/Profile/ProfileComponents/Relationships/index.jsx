@@ -1,8 +1,12 @@
 import React from "react";
+
+
 import Friends from "./Friends";
 import { Routes, Route, Link } from "react-router-dom";
 import FriendRequest from "./FriendRequests";
 const Relationship = () => {
+
+
   return (
     <div>
       <div className="col-lg-6">

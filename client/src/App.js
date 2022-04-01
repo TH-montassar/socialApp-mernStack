@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Spinner from "./shared/Spinner";
 import { setAuthToken } from "./utils/setAuthToken";
 import { authcheck, logout } from "./actions/auth.action";
+import Users from "./pages/Users";
 
 const App = () => {
   /* This is a React Hook that returns the current location of the user. */
@@ -48,7 +49,7 @@ const App = () => {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/profile/*" element={<Profile />}></Route>
-          <Route path="/s" element={<Spinner />}></Route>
+          <Route path="/users" element={<Users />}></Route>
 
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>

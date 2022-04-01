@@ -1,6 +1,9 @@
 import {
   ACCEPT_FRIENDS,
+  ADD_FRIEND,
+  ALL_USERS,
   GET_RELATIONSHIP,
+  REJECT_FRIENDS,
   RELATIONSHIP_ERROR,
   RELATIONSHIP_LOADING,
 } from "../constants/action";
@@ -8,6 +11,7 @@ import {
 const initialState = {
   relationships: [],
   relationship: null,
+  users: [],
   isLoading: false,
   error: {},
 };
@@ -20,6 +24,12 @@ const RelationshipsReducers = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
+    case ALL_USERS:
+      return {
+        ...state,
+        users: payload,
+        isLoading: false,
+      };
 
     case GET_RELATIONSHIP:
       return {
@@ -28,6 +38,18 @@ const RelationshipsReducers = (state = initialState, action) => {
         isLoading: false,
       };
     case ACCEPT_FRIENDS:
+      return {
+        ...state,
+        relationship: payload,
+        isLoading: false,
+      };
+    case REJECT_FRIENDS:
+      return {
+        ...state,
+        relationship: payload,
+        isLoading: false,
+      };
+    case ADD_FRIEND:
       return {
         ...state,
         relationship: payload,

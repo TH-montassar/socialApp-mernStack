@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authcheck } from "../../../../../actions/auth.action";
-import { getRelationship } from "../../../../../actions/relationship.action";
+import {
+  getRelationship,
+  rejectFriendRequest,
+} from "../../../../../actions/relationship.action";
 import Spinner from "../../../../../shared/Spinner";
 
 const Friends = () => {
@@ -22,13 +25,23 @@ const Friends = () => {
     return state.authReducers;
   });
   useEffect(() => {
-    console.log("user", user);
+    console.log("user", user.firstName);
   }, []);
+
+  const handlerClickReject = (e, id) => {
+    e.preventDefault();
+    dispatch(rejectFriendRequest(id));
+  };
+
   return isLoading ? (
     <Spinner />
   ) : (
     relationships.map((relationship) => (
-      <div key={relationship._id} className="tab-pane active fade show " id="frends">
+      <div
+        key={relationship._id}
+        className="tab-pane active fade show "
+        id="frends"
+      >
         <ul className="nearby-contct">
           <li>
             <div className="nearly-pepls">
@@ -40,22 +53,29 @@ const Friends = () => {
               <div className="pepl-info">
                 <h4>
                   <a href="time-line.html" title="">
-                    {relationship.receiver?.firstName} {relationship.receiver?.lastName}
+                    {relationship.receiver?.firstName === user?.firstName ? (
+                      <div>
+                        <span>{relationship.sender?.firstName}</span>
+                        <span>{relationship.sender?.lastName}</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span>{relationship.receiver?.firstName} </span>
+                        <span> {relationship.receiver?.lastName}</span>
+                      </div>
+                    )}
                   </a>
                 </h4>
-
-                <a
-                  href="#"
-                  title=""
+                <button
                   className="add-butn more-action"
-                  data-ripple=""
+                  onClick={(e) => handlerClickReject(e, relationship._id)}
                 >
                   unfriend
-                </a>
+                </button>
 
-                <a href="#" title="" className="add-butn" data-ripple="">
+                <button href="#" title="" className="add-butn" data-ripple="">
                   block Friend
-                </a>
+                </button>
               </div>
             </div>
           </li>

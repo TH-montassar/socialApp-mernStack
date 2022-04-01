@@ -4,6 +4,7 @@ import { authcheck } from "../../../../../actions/auth.action";
 import {
   acceptFriendRequest,
   getRelationship,
+  rejectFriendRequest,
 } from "../../../../../actions/relationship.action";
 import Spinner from "../../../../../shared/Spinner";
 
@@ -22,10 +23,13 @@ const Friends = () => {
     return state.authReducers;
   });
 
-  const handlerClick = (e, id) => {
+  const handlerClickAccept = (e, id) => {
     e.preventDefault();
     dispatch(acceptFriendRequest(id));
-    console.log("e");
+  };
+  const handlerClickReject = (e, id) => {
+    e.preventDefault();
+    dispatch(rejectFriendRequest(id));
   };
 
   return isLoading ? (
@@ -53,16 +57,19 @@ const Friends = () => {
                   </a>
                 </h4>
 
-                <button className="add-butn more-action" data-ripple="">
+                <button
+                  className="add-butn more-action"
+                  onClick={(e) => handlerClickReject(e, relationship._id)}
+                >
                   Delete Request
                 </button>
 
-                <a
+                <button
                   className="add-butn"
-                  onClick={(e) => handlerClick(e, relationship._id)}
+                  onClick={(e) => handlerClickAccept(e, relationship._id)}
                 >
                   confirm
-                </a>
+                </button>
               </div>
             </div>
           </li>

@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const compression = require("compression");
-
+const cors = require("cors");
 //db connection
 mongoose.connect(process.env.MONGO_DB_URI);
 mongoose.connection.on("connected", () => {
@@ -18,21 +18,24 @@ mongoose.connection.on("error", (err) => {
 
 //import routes
 const userRouter = require("./routes/user.routes");
-//const commentRouter = require("./routes/comment.routes");
-//const reactionRouter = require("./routes/reaction.routes");
-//const messageRoutes = require("./routes/message.routes");
+
 const postRoutes = require("./routes/post.routes");
 const authRouter = require("./routes/auth.routes");
 
 //middelware
 /* A middleware that helps you secure your Express apps by setting various HTTP headers. */
-app.use(helmet());
+app.use(cors());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 /* A middleware that helps you log requests to the console. */
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 
-app.use(compression()); //reduire taile for operations 
+app.use(compression()); //reduire taile for operations
 
 //routes middleware
 app.use("/api/users", userRouter);

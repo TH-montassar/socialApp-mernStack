@@ -1,5 +1,5 @@
 const Relationship = require("../models/relationship.models");
-
+const User = require("../models/user.models");
 const sendFriendRequest = async (req, res) => {
   const currentUser = req.verifiedUser._id;
   const receiver = req.user._id;
@@ -125,6 +125,18 @@ const getOwnedRelationship = async (req, res) => {
     return res.status(500).json(err);
   }
 };
+
+const getUser = async (req, res) => {
+  try {
+    const users = await User.find().populate("profile").sort({ createdAt: -1 });
+
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+module.exports.getUser = getUser;
 module.exports.sendFriendRequest = sendFriendRequest;
 module.exports.acceptFriendRequest = acceptFriendRequest;
 module.exports.rejectFriendRequest = rejectFriendRequest;

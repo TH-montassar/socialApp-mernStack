@@ -1,12 +1,15 @@
 const Post = require("../models/post.models");
 
 const createPost = async (req, res, next) => {
+  const host = process.env.HOST;
+  const port = process.env.PORT;
+
   try {
     const newPost = new Post({
       content: req.body.content,
       author: req.verifiedUser._id,
 
-      image: `http://localhost:4000/images/${req.file.filename}`,
+      image: `${host}:${port}/images/${req.file.filename}`,
     });
     const savedPost = await newPost.save();
     res.activity = { id: savedPost._id, model: "Post", action: "create" };

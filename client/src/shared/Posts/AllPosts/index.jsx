@@ -19,7 +19,6 @@ const Posts = () => {
   /* Creating a state variable called Form and setting it to an empty array. */
   const [Form, setForm] = useState([]);
 
- 
   /**
    * It sets the value of the input to the value of the target.
    * @param e - The event object that contains the data of the event that triggered the function.
@@ -78,7 +77,7 @@ const Posts = () => {
                 </div>
                 <div className="description">{post.content}</div>
                 <div className="post-meta">
-                  <img src={post.image} alt="" />
+                  <img src={post?.image} alt="mmm" />
                   <div className="we-video-info">
                     <ul>
                       <li>
@@ -242,7 +241,7 @@ const Posts = () => {
           </div>
         ))}
 
-        {/* ----------------------- */}
+        {/* ------------------------------------------------ */}
       </div>
     </div>
   );

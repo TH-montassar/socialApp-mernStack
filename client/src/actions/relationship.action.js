@@ -1,7 +1,10 @@
 import axios from "axios";
 import {
   ACCEPT_FRIENDS,
+  ADD_FRIEND,
+  ALL_USERS,
   GET_RELATIONSHIP,
+  REJECT_FRIENDS,
   RELATIONSHIP_ERROR,
   RELATIONSHIP_LOADING,
 } from "../constants/action";
@@ -35,7 +38,6 @@ export const acceptFriendRequest = (idRelationship) => async (dispatch) => {
   dispatch({
     type: RELATIONSHIP_LOADING,
   });
-
   try {
     //* parse your queryString in url
     const res = await axios.put(
@@ -43,6 +45,61 @@ export const acceptFriendRequest = (idRelationship) => async (dispatch) => {
     );
     dispatch({
       type: ACCEPT_FRIENDS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: RELATIONSHIP_ERROR,
+      payload: err,
+    });
+  }
+};
+
+export const sendFriendRequest = (userId) => async (dispatch) => {
+  dispatch({
+    type: RELATIONSHIP_LOADING,
+  });
+  try {
+    const res = await axios.post(
+      `/api/users/${userId}/relationships/addFriend`
+    );
+    dispatch({
+      type: ADD_FRIEND,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: RELATIONSHIP_ERROR,
+      payload: err,
+    });
+  }
+};
+
+export const rejectFriendRequest = (idRelationship) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `/api/users/relationships/${idRelationship}/reject`
+    );
+    dispatch({
+      type: REJECT_FRIENDS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: RELATIONSHIP_ERROR,
+      payload: err,
+    });
+  }
+};
+
+export const getUsers = () => async (dispatch) => {
+  dispatch({
+    type: RELATIONSHIP_LOADING,
+  });
+  try {
+    const res = await axios.get(`/api/users/AllUser`);
+    dispatch({
+      type: ALL_USERS,
       payload: res.data,
     });
   } catch (err) {

@@ -70,6 +70,18 @@ p {
   color: #8c8b8b;
 }
 
+.pepl-info > button:hover,
+button:focus,
+button:active {
+  color: inherit;
+  outline: none;
+  -webkit-text-decoration: none;
+  -moz-text-decoration: none;
+  -ms-text-decoration: none;
+  -o-text-decoration: none;
+  text-decoration: none;
+}
+
 a,
 a:hover,
 a:focus,
@@ -3361,7 +3373,7 @@ nav.breadcrumb {
   text-transform: capitalize;
 }
 
-a.add-butn {
+.add-butn {
   color: #fff;
   float: right;
   font-size: 13px;
@@ -3564,12 +3576,12 @@ a.add-butn {
   color: #8d8d8d;
 }
 
-a.add-butn.more-action {
+.add-butn.more-action {
   background: lightslategray none repeat scroll 0 0;
   right: 74px;
 }
 
-#frends a.add-butn.more-action {
+#frends .add-butn.more-action {
   right: 89px;
 }
 

@@ -67,8 +67,8 @@ const Header = () => {
               </ul>
             </li>
             <li>
-              <Link to="#" title="">
-                more pages
+              <Link to="/users" title="">
+               add Friends
               </Link>
             </li>
           </ul>
