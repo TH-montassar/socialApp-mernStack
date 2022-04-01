@@ -73,7 +73,7 @@ const login = async (req, res) => {
 
 const check = async (req, res) => {
   try {
-    const user = await User.findById(req.verifiedUser._id);
+    const user = await User.findById(req.verifiedUser._id).populate("profile");
     if (!user) {
       return res.status(404).json("not found user");
     } else {

@@ -2,6 +2,7 @@ import {
   ACCEPT_FRIENDS,
   ADD_FRIEND,
   ALL_USERS,
+  BLOCK_FRIEND,
   GET_RELATIONSHIP,
   REJECT_FRIENDS,
   RELATIONSHIP_ERROR,
@@ -43,6 +44,12 @@ const RelationshipsReducers = (state = initialState, action) => {
         relationship: payload,
         isLoading: false,
       };
+      case BLOCK_FRIEND:
+        return {
+          ...state,
+          relationship: payload,
+          isLoading: false,
+        };
     case REJECT_FRIENDS:
       return {
         ...state,

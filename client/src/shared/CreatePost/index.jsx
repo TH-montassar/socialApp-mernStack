@@ -50,8 +50,12 @@ const CreatePost = () => {
                         type="file"
                         // value={file.image}
                         FileName="image"
-                        onChange={(e) => setFile(e.target.files[0])}
+                        onChange={(e) =>
+                          setFile(URL.createObjectURL(e.target.files[0]))
+                        }
                       />
+
+                      <img className="imgPosty" src={file} />
                     </label>
                   </li>
 

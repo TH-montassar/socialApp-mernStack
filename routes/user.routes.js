@@ -74,7 +74,7 @@ router.param("relationship", async (req, res, next, id) => {
 });
 //relationship router
 
-router.get("/AllUser", getUser);
+router.get("/AllUser", verifyToken, getUser);
 
 router.post(
   "/:user/relationships/addFriend",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authcheck } from "../../../../../actions/auth.action";
 import {
+  blockFriendReq,
   getRelationship,
   rejectFriendRequest,
 } from "../../../../../actions/relationship.action";
@@ -31,6 +32,10 @@ const Friends = () => {
   const handlerClickReject = (e, id) => {
     e.preventDefault();
     dispatch(rejectFriendRequest(id));
+  };
+  const handlerClickBlock = (e, id) => {
+    e.preventDefault();
+    dispatch(blockFriendReq(id));
   };
 
   return isLoading ? (
@@ -73,7 +78,10 @@ const Friends = () => {
                   unfriend
                 </button>
 
-                <button href="#" title="" className="add-butn" data-ripple="">
+                <button
+                  className="add-butn"
+                  onClick={(e) => handlerClickBlock(e, relationship._id)}
+                >
                   block Friend
                 </button>
               </div>

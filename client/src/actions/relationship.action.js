@@ -3,6 +3,7 @@ import {
   ACCEPT_FRIENDS,
   ADD_FRIEND,
   ALL_USERS,
+  BLOCK_FRIEND,
   GET_RELATIONSHIP,
   REJECT_FRIENDS,
   RELATIONSHIP_ERROR,
@@ -82,6 +83,25 @@ export const rejectFriendRequest = (idRelationship) => async (dispatch) => {
     );
     dispatch({
       type: REJECT_FRIENDS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: RELATIONSHIP_ERROR,
+      payload: err,
+    });
+  }
+};
+export const blockFriendReq = (idRelationship) => async (dispatch) => {
+  dispatch({
+    type: RELATIONSHIP_LOADING,
+  });
+  try {
+    const res = await axios.put(
+      `/api/users/relationships/${idRelationship}/block`
+    );
+    dispatch({
+      type: BLOCK_FRIEND,
       payload: res.data,
     });
   } catch (err) {

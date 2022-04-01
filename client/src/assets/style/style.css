@@ -49,6 +49,11 @@ focus {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
 }
+.imgPost{
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .bio {
   display: flex;
   flex-direction: column;
