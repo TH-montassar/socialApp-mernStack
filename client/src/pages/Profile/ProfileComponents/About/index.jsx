@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
-import { getMyProfile } from "../../../../actions/profile.action";
-import { useDispatch, useSelector } from "react-redux";
-const About = () => {
-  // const dispatch = useDispatch();
+import React from "react";
 
-  // useEffect(() => {
-  //   dispatch(getMyProfile());
-  // }, []);
-  // const { profile } = useSelector((state) => {
-  //   return state.profileReducers;
+import { useSelector } from "react-redux";
+import { parseISO, format } from "date-fns";
+const About = () => {
+  const { user } = useSelector((state) => {
+    return state.authReducers;
+  });
+  console.log(user);
   const { profile } = useSelector((state) => {
     return state.profileReducers;
   });
@@ -120,7 +118,8 @@ const About = () => {
                               </li>
                               <li>
                                 <i class="fa-solid fa-cake-candles"></i>
-                                {profile.birthday}
+
+                                {format(parseISO(profile.birthday), "P")}
                               </li>
                             </ul>
                           </div>

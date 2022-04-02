@@ -96,157 +96,20 @@ const Header = () => {
                 <i className="ti-bell"></i>
                 <span>20</span>
               </Link>
-              <div className="dropdowns">
-                <span>4 New Notifications</span>
-                <ul className="drops-menu">
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-1.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>sarah Loren</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag green">New</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-2.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Jhon doe</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag red">Reply</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-3.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Andrew</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag blue">Unseen</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-4.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Tom cruse</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag">New</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-5.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Amy</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag">New</span>
-                  </li>
-                </ul>
-                <Link to="notifications.html" title="" className="more-mesg">
-                  view more
-                </Link>
-              </div>
+          
             </li>
             <li>
               <Link to="#" title="Messages" data-ripple="">
                 <i className="ti-comment"></i>
                 <span>12</span>
               </Link>
-              <div className="dropdowns">
-                <span>5 New Messages</span>
-                <ul className="drops-menu">
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-1.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>sarah Loren</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag green">New</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-2.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Jhon doe</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag red">Reply</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-3.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Andrew</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag blue">Unseen</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-4.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Tom cruse</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag">New</span>
-                  </li>
-                  <li>
-                    <Link to="notifications.html" title="">
-                      <img src="images/resources/thumb-5.jpg" alt="" />
-                      <div className="mesg-meta">
-                        <h6>Amy</h6>
-                        <span>Hi, how r u dear ...?</span>
-                        <i>2 min ago</i>
-                      </div>
-                    </Link>
-                    <span className="tag">New</span>
-                  </li>
-                </ul>
-                <Link to="messages.html" title="" className="more-mesg">
-                  view more
-                </Link>
-              </div>
+             
             </li>
             <li>
-              <Link to="#" title="Languages" data-ripple="">
-                <i className="fa fa-globe"></i>
+              <Link to="/activity" title="activty" data-ripple="">
+              <i class="fas fa-history"></i>
               </Link>
-              <div className="dropdowns languages">
-                <Link to="#" title="">
-                  <i className="ti-check"></i>English
-                </Link>
-                <Link to="#" title="">
-                  Arabic
-                </Link>
-                <Link to="#" title="">
-                  Dutch
-                </Link>
-                <Link to="#" title="">
-                  French
-                </Link>
-              </div>
+            
             </li>
             <li>
               <button

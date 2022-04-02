@@ -1,6 +1,6 @@
 const Relationship = require("../models/relationship.models");
 const User = require("../models/user.models");
-const sendFriendRequest = async (req, res) => {
+const sendFriendRequest = async (req, res, next) => {
   const currentUser = req.verifiedUser._id;
   const receiver = req.user._id;
   if (receiver.toString() === currentUser.toString()) {
@@ -18,9 +18,10 @@ const sendFriendRequest = async (req, res) => {
     res.activity = {
       id: savedRelationship._id,
       model: "Relationship",
-      action: "sendFriendRequest",
+      action: "send Friend Request",
     };
-    return res.status(201).json(savedRelationship);
+    res.status(201).json(savedRelationship);
+    return next();
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -43,7 +44,7 @@ const acceptFriendRequest = async (req, res, next) => {
     res.activity = {
       id: acceptRequest._id,
       model: "relationship",
-      action: " acceptFriendRequest",
+      action: " accept   Friend  Request",
     };
     res.status(201).json("friend request accepted");
     return next();
@@ -63,17 +64,23 @@ const rejectFriendRequest = async (req, res) => {
   }
 };
 
-const blockFriend = async (req, res) => {
+const blockFriend = async (req, res, next) => {
   const currentUser = req.verifiedUser._id;
   const relationship = req.relationship.id;
 
   try {
     if (relationship) {
-      await Relationship.findByIdAndUpdate(
+      const blockFriend = await Relationship.findByIdAndUpdate(
         relationship,
         { status: "blocked" },
         { new: true }
       );
+
+      res.activity = {
+        id: blockFriend._id,
+        model: "relationship",
+        action: " block  Friend ",
+      };
     } else {
       const receiver = req.user._id;
       const newRelationship = new Relationship({
@@ -83,7 +90,8 @@ const blockFriend = async (req, res) => {
       });
       await newRelationship.save();
     }
-    return res.status(200).json("successfully block friend ");
+    res.status(200).json("successfully block friend ");
+    return next();
   } catch (err) {
     return res.status(500).json(err);
   }

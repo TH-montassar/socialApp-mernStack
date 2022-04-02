@@ -81,7 +81,6 @@ router.param("post", async (req, res, next, id) => {
   }
 });
 
-
 const multer = require("multer");
 const path = require("path");
 
@@ -101,7 +100,6 @@ const upload = multer({
   //   fileSize: 500000,
   // },
 });
-
 
 // posts routes
 router.post("/:post/share", verifyToken, sharePost, activity);

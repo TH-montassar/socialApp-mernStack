@@ -41,3 +41,7 @@ export const REJECT_FRIENDS = "REJECT_FRIENDS";
 export const ALL_USERS = "ALL_USERS";
 export const ADD_FRIEND = "ADD_FRIEND";
 export const BLOCK_FRIEND = "BLOCK_FRIEND";
+
+export const ACTIVITY_ERROR = "ACTIVITY_ERROR";
+export const GET_ACTIVITY = "GET_ACTIVITY";
+export const ACTIVITY_LOADING = "ACTIVITY_LOADING";

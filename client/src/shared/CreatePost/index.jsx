@@ -6,9 +6,9 @@ const CreatePost = () => {
   /* Creating a function that will dispatch an action to the store. */
   const dispatch = useDispatch();
 
-  const [file, setFile] = useState();
-  const [text, setText] = useState();
-
+  const [file, setFile] = useState(null);
+  const [text, setText] = useState("");
+  const [url, setUrl] = useState("");
   const onSubmitForm = (e) => {
     e.preventDefault();
     const post = new FormData();
@@ -17,11 +17,13 @@ const CreatePost = () => {
 
     dispatch(createPost(post));
 
-    //ba3ed maykamel yraja formul fer8a
     // setForm({
     //   ...Form,
     //   content: "",
     // });
+    setUrl("");
+    setFile(null);
+    setText("");
   };
 
   return (
@@ -48,14 +50,14 @@ const CreatePost = () => {
                     <label className="fileContainer">
                       <input
                         type="file"
-                        // value={file.image}
                         FileName="image"
-                        onChange={(e) =>
-                          setFile(URL.createObjectURL(e.target.files[0]))
-                        }
+                        onChange={(e) => {
+                          setFile(e.target.files[0]);
+                          setUrl(URL.createObjectURL(e.target.files[0]));
+                        }}
                       />
 
-                      <img className="imgPosty" src={file} />
+                      <img className="imgPosty" src={url} />
                     </label>
                   </li>
 

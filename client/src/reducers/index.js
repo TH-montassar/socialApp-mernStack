@@ -5,6 +5,7 @@ import commentReducers from "./comment.reducers";
 import profileReducers from "./profile.reducers";
 import reactionReducers from "./reaction.reducers";
 import relationshipsReducers from "./relationships.reducers";
+import activityReducers from "./activity.reducers";
 export default combineReducers({
   authReducers,
   postReducers,
@@ -12,4 +13,5 @@ export default combineReducers({
   profileReducers,
   reactionReducers,
   relationshipsReducers,
+  activityReducers,
 });

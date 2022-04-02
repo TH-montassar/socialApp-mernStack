@@ -104,7 +104,7 @@ router.put(
   "/relationships/:relationship/block",
   verifyToken,
   isRelationshipOwner,
-  blockFriend
+  blockFriend,activity
 );
 router.post("/:user/relationships/block", verifyToken, blockFriend);
 

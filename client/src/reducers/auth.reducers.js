@@ -7,7 +7,7 @@ import {
   REGISTER,
 } from "../constants/action";
 
-const initialSate = {
+const initialState = {
   token: localStorage.getItem("token"),
   user: null,
   error: {},
@@ -15,7 +15,7 @@ const initialSate = {
   isAuthenticated: false,
 };
 
-const AuthReducers = (state = initialSate, action) => {
+const AuthReducers = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case AUTH_LOADING:
