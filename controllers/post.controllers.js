@@ -1,9 +1,8 @@
 const Post = require("../models/post.models");
-
+const path = require("path");
 const createPost = async (req, res, next) => {
   const host = process.env.HOST;
   const port = process.env.PORT;
-
   try {
     const newPost = new Post({
       content: req.body.content,

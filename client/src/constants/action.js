@@ -39,6 +39,7 @@ export const RELATIONSHIP_ERROR = "RELATIONSHIP_ERROR";
 export const ACCEPT_FRIENDS = "ACCEPT_FRIENDS";
 export const REJECT_FRIENDS = "REJECT_FRIENDS";
 export const ALL_USERS = "ALL_USERS";
+export const GET_USER = "GET_USER";
 export const ADD_FRIEND = "ADD_FRIEND";
 export const BLOCK_FRIEND = "BLOCK_FRIEND";
 

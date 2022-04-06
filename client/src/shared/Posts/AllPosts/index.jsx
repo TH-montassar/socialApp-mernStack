@@ -10,7 +10,6 @@ import Spinner from "../../../shared/Spinner";
 
 import comet1 from "../../../assets/resources/comet-1.jpg";
 import comet2 from "../../../assets/resources/comet-2.jpg";
-import { getReactions } from "../../../actions/reaction.action";
 
 const Posts = () => {
   /* Creating a function that will dispatch an action to the store. */
@@ -45,14 +44,11 @@ const Posts = () => {
   const { isLoading, posts } = useSelector((state) => {
     return state.postReducers;
   });
+  const { user } = useSelector((state) => {
+    return state.authReducers;
+  });
 
-  // useEffect(() => {
-  //   dispatch(getReactions());
-  // }, []);
-  // const { reactions } = useSelector((state) => {
-  //   return state.reactionReducers;
-  // });
-
+  console.log(user);
   return isLoading ? (
     <Spinner />
   ) : (
@@ -62,9 +58,20 @@ const Posts = () => {
           <div key={post._id} className="central-meta item">
             <div className="user-post">
               <div className="friend-info">
-                <figure>
-                  <img src={friendAvatar10} alt="" />
+                {post.author?._id === user._id ? (
+                  <figure>
+                  <Link to={`/profile`}>
+                    <img src={friendAvatar10} alt="" />
+                  </Link>
                 </figure>
+                ) : (
+                  <figure>
+                    <Link to={`/profileUser?userId=${post.author?._id}`}>
+                      <img src={friendAvatar10} alt="" />
+                    </Link>
+                  </figure>
+                )}
+
                 <div className="friend-name">
                   <Link to="time-line.html">
                     <span>

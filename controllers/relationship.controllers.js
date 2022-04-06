@@ -17,7 +17,7 @@ const sendFriendRequest = async (req, res, next) => {
     const savedRelationship = await newRelationship.save();
     res.activity = {
       id: savedRelationship._id,
-      model: "Relationship",
+      model: "relationship",
       action: "send Friend Request",
     };
     res.status(201).json(savedRelationship);
@@ -135,56 +135,11 @@ const getOwnedRelationship = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const currentUserId = req.verifiedUser._id;
-  console.log(currentUserId);
+ 
+  const userId = req.user._id;
   try {
-    const relationship = await Relationship.find({
-      $or: [{ sender: currentUserId }, { receiver: currentUserId }],
-    });
-    //  console.log(relationship);
-
-    const sender = [];
-    const receiver = [];
-    for (let index = 0; index < relationship.length; index++) {
-      // console.log(relationship[index].sender);
-      sender.push(relationship[index].sender);
-      receiver.push(relationship[index].receiver);
-    }
-
-    // console.log(sender[1])
-    // console.log(receiver)
-    // const u =await User.find()
-    // console.log("d",u._id)
-
-    for (let item = 0; item < sender.length; item++) {
-      for (let i = 0; i < receiver.length; i++) {
-        const users = await User.find({
-          $or: [{ _id: sender[item] }, { _id: receiver[i] }],
-        })
-          .populate("profile")
-          .sort({ createdAt: -1 });
-
-        return res.status(200).json(users);
-      }
-    }
-    return res.status(200).json("users");
-    //const userId = [];
-    // for (let index = 0; index < users.length; index++) {
-    //   userId.push(users[index]._id);
-    // }
-
-    // for (let index = 0; index < userId.length; index++) {
-    //   for (let i = 0; i < sender.length; i++) {
-    //     if (userId[index] === sender[i]) {
-    //       console.log(userId[index]);
-    //     }
-    //   }
-    //   for (let j = 0; j < receiver.length; j++) {
-    //     if (userId[index] === receiver[j]) {
-    //       console.log(userId[index]);
-    //     }
-    //   }
-    // }
+    const user = await User.findById(userId).populate("profile");
+    return res.status(200).json(user);
   } catch (err) {
     return res.status(500).json(err);
   }

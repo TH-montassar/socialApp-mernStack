@@ -22,6 +22,7 @@ import { setAuthToken } from "./utils/setAuthToken";
 import { authcheck, logout } from "./actions/auth.action";
 import Users from "./pages/Users";
 import Activity from "./pages/Activity";
+import ProfileUser from "./pages/ProfileUser";
 
 const App = () => {
   /* This is a React Hook that returns the current location of the user. */
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/profile/*" element={<Profile />}></Route>
           <Route path="/users" element={<Users />}></Route>
           <Route path="/activity" element={<Activity />}></Route>
+          <Route path="/profileUser/*" element={<ProfileUser />}></Route>
 
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>

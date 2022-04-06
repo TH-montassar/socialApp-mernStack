@@ -3,6 +3,7 @@ import {
   ACCEPT_FRIENDS,
   ADD_FRIEND,
   ALL_USERS,
+  GET_USER,
   BLOCK_FRIEND,
   GET_RELATIONSHIP,
   REJECT_FRIENDS,
@@ -120,6 +121,24 @@ export const getUsers = () => async (dispatch) => {
     const res = await axios.get(`/api/users/AllUser`);
     dispatch({
       type: ALL_USERS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: RELATIONSHIP_ERROR,
+      payload: err,
+    });
+  }
+};
+
+export const getUser = (id) => async (dispatch) => {
+  dispatch({
+    type: RELATIONSHIP_LOADING,
+  });
+  try {
+    const res = await axios.get(`/api/users/${id}/getUser`);
+    dispatch({
+      type: GET_USER,
       payload: res.data,
     });
   } catch (err) {

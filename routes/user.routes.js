@@ -74,7 +74,7 @@ router.param("relationship", async (req, res, next, id) => {
 });
 //relationship router
 
-router.get("/AllUser", verifyToken, getUser);
+router.get("/:user/getUser", verifyToken, getUser);
 
 router.post(
   "/:user/relationships/addFriend",
@@ -104,20 +104,48 @@ router.put(
   "/relationships/:relationship/block",
   verifyToken,
   isRelationshipOwner,
-  blockFriend,activity
+  blockFriend,
+  activity
 );
 router.post("/:user/relationships/block", verifyToken, blockFriend);
 
 router.get("/relationships", verifyToken, getOwnedRelationship);
+router.get("/getUser", verifyToken, getUser);
+
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: "./uploads",
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+});
+
+const uploadAvatar = multer({
+  storage: storage,
+  // limits: {
+  //   fileSize: 500000,
+  // },
+});
 
 //profile router
-
-router.put("/profile", verifyToken, updateProfile);
+router.put(
+  "/profile",
+  verifyToken,
+  uploadAvatar.single("avatar"),
+  updateProfile
+);
 router.get("/:user/profile", verifyToken, getProfile);
 router.get("/Profile/me", verifyToken, getMyProfile);
 
 //user activity
 router.get("/activity/me", verifyToken, getMyActivities);
+
+
 //messages
 router.get("/:user/conversation", verifyToken, getMessages);
 module.exports = router;
